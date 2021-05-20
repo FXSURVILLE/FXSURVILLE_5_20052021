@@ -1,0 +1,25 @@
+* {
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    color: $color-text;
+}
+
+.titre {
+    font-size: 14px;
+    font-weight: 400;
+}
+.duree {
+    font-size: 14px;
+    font-weight: 600;
+}
+.ingredients {
+    font-size: 10px;
+}
+.description {
+    font-size: 10px;
+}
+
+.btn {
+    font-size: 18px;
+    color: $color-light;
+}

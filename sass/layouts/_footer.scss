@@ -1,0 +1,20 @@
+footer {
+    background-color: $color-inactive;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    h1 {
+        margin-left: 25px;
+    }
+    nav {
+        display: flex;
+        flex-flow: column;
+        a {
+            margin-left: 25px;
+        }
+        .fas {
+            width: 30px;
+        }
+    }
+}
+
+

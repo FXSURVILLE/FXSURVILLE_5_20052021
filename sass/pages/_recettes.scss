@@ -1,0 +1,81 @@
+
+.recherches {
+    margin: 0% 4% 0% 4%;
+    .recherche {
+        margin: 2%;
+        width: auto;
+        display: flex;
+        background-color: $color-shadow;
+        justify-content: space-between;
+        border-radius: 5px;
+        &__texte {
+            height: 50px;
+            width: 95%;
+            background-color: $color-shadow;
+            border: hidden;
+            border-radius: 5px;
+            padding-left: 10px;
+        }
+        #search {
+            height: 50px;
+            width: 5%;
+            @include center-item;
+        }
+    }
+}
+
+.filtres {
+    #ingredients {
+        @include filtres;
+        background-color: $color-ingredients;
+    }
+    #appareil {
+        @include filtres;
+        background-color: $color-appareil;
+    }
+    #ustensiles {
+        @include filtres;
+        background-color: $color-ustensiles;
+    }
+}
+
+#recettes {
+    margin: 0% 4% 0% 4%;
+    @include flex-wrap;
+    .bloc-recette {
+        height: 260px;
+        margin: 2%;
+        width: 29.3%;
+        .img {
+            height: 50%;
+            background-color: $color-inactive;
+            border-radius: 5px 5px 0px 0px;
+        }
+        .recette {
+            height: 50%;
+            background-color: $color-shadow;
+            border-radius: 0px 0px 5px 5px;
+            @include flex-wrap;
+            .titre {
+                min-width: 65%;
+                height: 30%;
+                padding: $margin-infos;
+                @include center-vert;
+            }
+            .duree {
+                width: 25%;
+                height: 30%;
+                @include center-vert;
+                .fa-clock {
+                    margin-right: 5px;
+                }
+            }
+            .ingredients {
+                @include lower-info;
+            }
+            .description {
+                @include lower-info;
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "fxsurville_5_20052021",
+  "version": "1.0.0",
+  "description": "Les petits plats",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FXSURVILLE/FXSURVILLE_5_20052021.git"
+  },
+  "author": "SURVILLE FX",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FXSURVILLE/FXSURVILLE_5_20052021/issues"
+  },
+  "homepage": "https://github.com/FXSURVILLE/FXSURVILLE_5_20052021#readme"
+}
