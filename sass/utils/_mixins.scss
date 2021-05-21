@@ -1,3 +1,7 @@
+@mixin border-rad {
+    border-radius: 5px;
+}
+
 @mixin flex-wrap {
     display: flex;
     flex-direction: row;
@@ -25,11 +29,11 @@
 }
 
 @mixin filtres {
-    margin: 2%;
-    height: 50px;
-    width: 120px;
-    padding-left: 5px;
-    border-radius: 5px;
+    margin: 1%;
+    height: 69px;
+    width: 170px;
+    padding-left: 15px;
+    @include border-rad;
     border: hidden;
     color: $color-light;
 }
@@ -51,14 +55,6 @@
     flex-flow: row;
 }
 
-@mixin anim-box {
-    animation: pop-box $anim-dur ease-out backwards;
-    @for $i from 1 through $num-bars {
-        &--#{$i} {
-            animation-delay: $anim-delay * $i;
-        }
-    }
-}
 
 @mixin wrap-text {
     white-space: nowrap;

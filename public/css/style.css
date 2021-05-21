@@ -19,27 +19,50 @@ figure {
   color: #000000;
 }
 
-.titre {
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.duree {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.ingredients {
-  font-size: 10px;
-}
-
-.description {
-  font-size: 10px;
-}
-
-.btn {
+.recherche__texte {
   font-size: 18px;
+}
+.recherche .fa-search {
+  font-size: 32px;
+}
+
+.filtres__select .selected {
   color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+}
+.filtres__select .selected .fa-times-circle {
+  color: #ffffff;
+  font-size: 20px;
+}
+.filtres__ingredients {
+  font-size: 18px;
+  font-weight: 700;
+}
+.filtres__appareil {
+  font-size: 18px;
+  font-weight: 700;
+}
+.filtres__ustensiles {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.recette .titre {
+  font-size: 18px;
+}
+.recette .duree {
+  font-size: 18px;
+  font-weight: 700;
+}
+.recette .duree .fa-clock {
+  font-size: 20px;
+}
+.recette .ingredients {
+  font-size: 12px;
+}
+.recette .description {
+  font-size: 12px;
 }
 
 .accueil {
@@ -75,18 +98,6 @@ footer nav .fas {
   width: 30px;
 }
 
-@media all and (min-width: 720px) {
-  .accueil__logo {
-    height: auto;
-    width: 30%;
-  }
-}
-@media all and (min-width: 1024px) {
-  .accueil__logo {
-    height: 100px;
-    width: auto;
-  }
-}
 .recherches {
   margin: 0% 4% 0% 4%;
 }
@@ -99,46 +110,64 @@ footer nav .fas {
   border-radius: 5px;
 }
 .recherches .recherche__texte {
-  height: 50px;
-  width: 95%;
+  height: 69px;
+  width: 100%;
   background-color: #e7e7e7;
   border: hidden;
   border-radius: 5px;
   padding-left: 10px;
 }
-.recherches .recherche #search {
-  height: 50px;
-  width: 5%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.recherches .recherche .fa-search {
+  position: relative;
+  top: 18px;
+  right: 18px;
 }
 
-.filtres #ingredients {
-  margin: 2%;
-  height: 50px;
-  width: 120px;
+.filtres {
+  padding-left: 1%;
+}
+.filtres__select {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.filtres__select .selected {
+  display: flex;
+  align-items: center;
+  margin: 1%;
   padding-left: 5px;
+  width: fit-content;
+  border-radius: 5px;
+  background-color: #3282f7;
+}
+.filtres__select .selected .fa-times-circle {
+  padding: 5px;
+}
+.filtres__ingredients {
+  margin: 1%;
+  height: 69px;
+  width: 170px;
+  padding-left: 15px;
   border-radius: 5px;
   border: hidden;
   color: #ffffff;
   background-color: #3282f7;
 }
-.filtres #appareil {
-  margin: 2%;
-  height: 50px;
-  width: 120px;
-  padding-left: 5px;
+.filtres__appareil {
+  margin: 1%;
+  height: 69px;
+  width: 170px;
+  padding-left: 15px;
   border-radius: 5px;
   border: hidden;
   color: #ffffff;
   background-color: #68d9a4;
 }
-.filtres #ustensiles {
-  margin: 2%;
-  height: 50px;
-  width: 120px;
-  padding-left: 5px;
+.filtres__ustensiles {
+  margin: 1%;
+  height: 69px;
+  width: 170px;
+  padding-left: 15px;
   border-radius: 5px;
   border: hidden;
   color: #ffffff;
@@ -146,41 +175,44 @@ footer nav .fas {
 }
 
 #recettes {
-  margin: 0% 4% 0% 4%;
+  margin: 0% 4% 4% 4%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 #recettes .bloc-recette {
-  height: 260px;
+  height: 364px;
   margin: 2%;
-  width: 29.3%;
 }
 #recettes .bloc-recette .img {
-  height: 50%;
+  height: 178px;
   background-color: #c7bebe;
   border-radius: 5px 5px 0px 0px;
 }
 #recettes .bloc-recette .recette {
-  height: 50%;
+  height: 186px;
   background-color: #e7e7e7;
   border-radius: 0px 0px 5px 5px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 #recettes .bloc-recette .recette .titre {
-  min-width: 65%;
-  height: 30%;
+  min-width: 50%;
+  height: 50px;
   padding: 0% 5% 0% 5%;
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 #recettes .bloc-recette .recette .duree {
-  width: 25%;
-  height: 30%;
+  width: 100px;
+  height: 50px;
   display: flex;
   align-items: center;
 }
@@ -200,6 +232,32 @@ footer nav .fas {
   text-overflow: ellipsis;
   height: 65%;
   margin: 0% 5% 0% 5%;
+}
+
+@media all {
+  .bloc-recette {
+    width: 100%;
+  }
+}
+@media all and (min-width: 720px) {
+  .accueil__logo {
+    height: auto;
+    width: 30%;
+  }
+
+  .bloc-recette {
+    width: 45%;
+  }
+}
+@media all and (min-width: 1024px) {
+  .accueil__logo {
+    height: 100px;
+    width: auto;
+  }
+
+  .bloc-recette {
+    width: 29.3%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -4,22 +4,58 @@
     color: $color-text;
 }
 
-.titre {
-    font-size: 14px;
-    font-weight: 400;
-}
-.duree {
-    font-size: 14px;
-    font-weight: 600;
-}
-.ingredients {
-    font-size: 10px;
-}
-.description {
-    font-size: 10px;
+.recherche{
+    &__texte {
+        font-size: 18px;
+    }
+    .fa-search {
+        font-size: 32px;
+    }
 }
 
-.btn {
-    font-size: 18px;
-    color: $color-light;
+.filtres {
+    &__select {
+        .selected {
+            color: $color-light;
+            font-size: 14px;
+            font-weight: 700;
+            .fa-times-circle {
+                color: $color-light;
+                font-size: 20px;
+            }
+        }
+    }
+    &__ingredients {
+        font-size: 18px;
+        font-weight: 700;
+    }
+    &__appareil {
+        font-size: 18px;
+        font-weight: 700;
+    }
+    &__ustensiles {
+        font-size: 18px;
+        font-weight: 700;
+    }
 }
+
+.recette {
+    .titre {
+        font-size: 18px;
+    }
+    .duree {
+        font-size: 18px;
+        font-weight: 700;
+        .fa-clock {
+            font-size: 20px;
+        }
+    }
+    .ingredients {
+        font-size: 12px;
+    }
+    .description {
+        font-size: 12px;
+    }
+}
+
+

@@ -9,62 +9,82 @@
         justify-content: space-between;
         border-radius: 5px;
         &__texte {
-            height: 50px;
-            width: 95%;
+            height: 69px;
+            width: 100%;
             background-color: $color-shadow;
             border: hidden;
             border-radius: 5px;
             padding-left: 10px;
         }
-        #search {
-            height: 50px;
-            width: 5%;
-            @include center-item;
+        .fa-search {
+            position: relative;
+            top: 18px;
+            right: 18px;
         }
     }
 }
 
+
 .filtres {
-    #ingredients {
+    padding-left: 1%;
+    &__select {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .selected {
+            @include center-vert;
+            margin: 1%;
+            padding-left: 5px;
+            width: fit-content;
+            border-radius: 5px;
+            background-color: $color-ingredients;
+            .fa-times-circle {
+                padding: 5px;
+            }
+        }
+    }
+    &__ingredients {
         @include filtres;
         background-color: $color-ingredients;
     }
-    #appareil {
+    &__appareil {
         @include filtres;
         background-color: $color-appareil;
     }
-    #ustensiles {
+    &__ustensiles {
         @include filtres;
         background-color: $color-ustensiles;
     }
 }
 
 #recettes {
-    margin: 0% 4% 0% 4%;
+    margin: 0% 4% 4% 4%;
     @include flex-wrap;
     .bloc-recette {
-        height: 260px;
+        height: 364px;
         margin: 2%;
-        width: 29.3%;
+        // width: 100%;
         .img {
-            height: 50%;
+            height: 178px;
             background-color: $color-inactive;
             border-radius: 5px 5px 0px 0px;
         }
         .recette {
-            height: 50%;
+            height: 186px;
             background-color: $color-shadow;
             border-radius: 0px 0px 5px 5px;
+            padding-bottom: 10px;
             @include flex-wrap;
             .titre {
-                min-width: 65%;
-                height: 30%;
+                min-width: 50%;
+                height: 50px;
                 padding: $margin-infos;
                 @include center-vert;
+                @include wrap-text;
             }
             .duree {
-                width: 25%;
-                height: 30%;
+                width: 100px;
+                height: 50px;
                 @include center-vert;
                 .fa-clock {
                     margin-right: 5px;

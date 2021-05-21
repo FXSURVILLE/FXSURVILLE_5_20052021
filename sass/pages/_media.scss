@@ -1,8 +1,19 @@
+@media all {
+    // fiches
+    .bloc-recette {
+        width: 100%;
+    }
+}
+
 @media all and (min-width: 720px) {
     // logo
     .accueil__logo {
         height: auto;
         width: 30%;
+    }
+    // fiches
+    .bloc-recette {
+        width: 45%;
     }
 }
 
@@ -11,5 +22,9 @@
     .accueil__logo {
         height: 100px;
         width: auto;
+    }
+    // fiches
+    .bloc-recette {
+        width: 29.3%;
     }
 }
