@@ -11,17 +11,6 @@ console.table(recipes);
 // recipes.forEach(recipe => console.log(recipe.appliance));
 // recipes.forEach(recipe => console.log(recipe.ustensils));
 
-// recipes.forEach(function(recipe){
-//     let fiche = document.createElement('div');
-//     fiche.classList.add('bloc-recette');
-//     fiche.textContent = recipe.name
-//     document.querySelector('#recettes').appendChild(fiche);
-// //     let blocImg = document.createElement('div');
-// //     blocImg.classList.add('img');
-// //     document.querySelector('.bloc-recette').appendChild(blocImg);
-//     // let blocImg = document.createElement('div');
-// });
-
 class FicheRecetteElement extends HTMLElement {
     constructor(){
         super();
