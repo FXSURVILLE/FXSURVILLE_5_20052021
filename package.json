@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Les petits plats",
   "main": "index.js",
+  // "type": "module",
   "scripts": {
     "sass": "sass --watch ./sass/main.scss:./public/css/style.css"
   },
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/FXSURVILLE/FXSURVILLE_5_20052021/issues"
   },
-  "homepage": "https://github.com/FXSURVILLE/FXSURVILLE_5_20052021#readme"
+  "homepage": "https://github.com/FXSURVILLE/FXSURVILLE_5_20052021#readme",
+  "devDependencies": {
+    "sass": "^1.34.0"
+  }
 }
