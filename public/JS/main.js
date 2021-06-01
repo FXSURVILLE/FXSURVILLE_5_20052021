@@ -6,7 +6,7 @@ console.table(recipes);
 
 // recipes.forEach(recipe => console.log(recipe));
 // recipes.forEach(recipe => console.log(recipe.name));
-// recipes.forEach(recipe => console.log(recipe.ingredients));
+recipes.forEach(recipe => console.log(recipe.ingredients));
 // recipes.forEach(recipe => console.log(recipe.description));
 // recipes.forEach(recipe => console.log(recipe.appliance));
 // recipes.forEach(recipe => console.log(recipe.ustensils));
@@ -46,22 +46,26 @@ recipes.forEach(recipe => {eachName += `
     <div class="recette">
         <div class="titre">${recipe.name}</div>
         <p class="duree"><i class="far fa-clock"></i>${recipe.time} mn</p>
-        <div class="ingredients">${recipe.ingredients}</div>
+        <div class="ingredients">${recipe.ingredients[0].ingredient}: ${recipe.ingredients[0].quantity}${recipe.ingredients[0].unit}</div>
         <div class="description">${recipe.description}</div>
     </div>
 </div>
 `;
 });
-console.log(eachName);
+
 document.getElementById("recettes").innerHTML=eachName;
 
 const length = recipes.length
 console.log(length);
 
-let name = "";
+function liste() {
+let liste = "";
 for(var i = 0; i < length; i++){
-    name += recipes[i].name.innerText+"\n";
+    liste += recipe.ingredients[i].ingredient+"\n";
+    console.log(liste);
 }
+return liste;
+};
 
 // //surveille la recherche
 // const rechercheTexte = document.getElementById('recherche__texte');
