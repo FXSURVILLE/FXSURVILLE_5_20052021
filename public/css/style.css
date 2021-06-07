@@ -35,15 +35,7 @@ figure {
   color: #ffffff;
   font-size: 20px;
 }
-.filtres__ingredients {
-  font-size: 18px;
-  font-weight: 700;
-}
-.filtres__appareil {
-  font-size: 18px;
-  font-weight: 700;
-}
-.filtres__ustensiles {
+.filtres__choix {
   font-size: 18px;
   font-weight: 700;
 }
@@ -143,7 +135,7 @@ footer nav .fas {
 .filtres__select .selected .fa-times-circle {
   padding: 5px;
 }
-.filtres__ingredients {
+.filtres__choix {
   margin: 1%;
   height: 69px;
   width: 170px;
@@ -151,26 +143,17 @@ footer nav .fas {
   border-radius: 5px;
   border: hidden;
   color: #ffffff;
+}
+
+#filtres-ingredients {
   background-color: #3282f7;
 }
-.filtres__appareil {
-  margin: 1%;
-  height: 69px;
-  width: 170px;
-  padding-left: 15px;
-  border-radius: 5px;
-  border: hidden;
-  color: #ffffff;
+
+#filtres-appareil {
   background-color: #68d9a4;
 }
-.filtres__ustensiles {
-  margin: 1%;
-  height: 69px;
-  width: 170px;
-  padding-left: 15px;
-  border-radius: 5px;
-  border: hidden;
-  color: #ffffff;
+
+#filtres-ustensiles {
   background-color: #ed6454;
 }
 

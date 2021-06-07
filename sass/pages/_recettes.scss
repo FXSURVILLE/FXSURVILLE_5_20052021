@@ -43,18 +43,18 @@
             }
         }
     }
-    &__ingredients {
+    &__choix {
         @include filtres;
-        background-color: $color-ingredients;
     }
-    &__appareil {
-        @include filtres;
-        background-color: $color-appareil;
-    }
-    &__ustensiles {
-        @include filtres;
-        background-color: $color-ustensiles;
-    }
+}
+#filtres-ingredients {
+    background-color: $color-ingredients;
+}
+#filtres-appareil {
+    background-color: $color-appareil;
+}
+#filtres-ustensiles {
+    background-color: $color-ustensiles;
 }
 
 #recettes {
