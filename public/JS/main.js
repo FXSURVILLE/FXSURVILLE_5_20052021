@@ -6,10 +6,21 @@ console.table(recipes);
 
 // recipes.forEach(recipe => console.log(recipe));
 // recipes.forEach(recipe => console.log(recipe.name));
-recipes.forEach(recipe => console.log(recipe.ingredients));
+// recipes.forEach(recipe => console.log(recipe.ingredients));
 // recipes.forEach(recipe => console.log(recipe.description));
 // recipes.forEach(recipe => console.log(recipe.appliance));
 // recipes.forEach(recipe => console.log(recipe.ustensils));
+// recipes.forEach((recipe) => const recette = recipe.name);
+// console.log(recette);
+
+// set d'ingrédients
+const setIngredents=new Set();
+
+// set d'appliance
+const setAppliance=new Set(recipes.forEach(recipe => console.log(recipe.appliance)));
+
+// set d'ustensils
+const setUstensils=new Set(recipes.forEach(recipe => console.log(recipe.ustensils)));
 
 class FicheRecetteElement extends HTMLElement {
     constructor(){
@@ -67,9 +78,11 @@ for(var i = 0; i < length; i++){
 return liste;
 };
 
-// //surveille la recherche
+// // //surveille la recherche
 // const rechercheTexte = document.getElementById('recherche__texte');
-// rechercheTexte.addEventListener('input',recherche);
+// rechercheTexte.addEventListener('input',function recherche(){
+//     if ()
+// });
 
 // function recherche() {}
 
