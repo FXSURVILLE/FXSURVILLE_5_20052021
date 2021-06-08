@@ -14,11 +14,23 @@ console.table(recipes);
 // console.log(recette);
 
 // set d'ingrédients
-const setIngredents=new Set();
-recipes.forEach(recipe => setIngredents.add(recipe.ingredients))
-console.log(setIngredents);
-// const setIngredents2=recipes.concat(recipe => recipe.ingredients);
-// console.log(setIngredents2);
+const recupIngredients=[];
+recipes.forEach(recipe => recupIngredients.push(recipe.ingredients));
+console.log(recupIngredients);
+let flatIngredients=recupIngredients.flat(1); // concatener
+console.log(flatIngredients);
+const listIngredients=[];
+flatIngredients.forEach(ing => listIngredients.push(ing.ingredient));
+console.log(listIngredients);
+const setIngredients=new Set(listIngredients); // nettoyer les doublons
+// liste des ingredients triés
+let arrayIngredients=[...setIngredients];
+arrayIngredients.sort((a,b)=>a.localeCompare(b));
+console.log(arrayIngredients);
+// affichage choix
+let eachIngredient ='';
+arrayIngredients.forEach(ingredients => {eachIngredient += `<option value="${ingredients}">${ingredients}</option>`});
+document.getElementById("filtres-ingredients").innerHTML=eachIngredient;
 
 // liste d'appliance
 const setAppliance=recipes.reduce((acc,e)=>{return acc.add(e.appliance)}, new Set());
@@ -31,18 +43,17 @@ arrayAppliance.forEach(appliance => {eachAppliance += `<option value="${applianc
 document.getElementById("filtres-appareil").innerHTML=eachAppliance;
 
 // set d'ustensils
-// const setUstensils=recipes.forEach(recipe => console.log(recipe.ustensils));
 const recupUstensils=[];
 recipes.forEach(recipe => recupUstensils.push(recipe.ustensils));
 let flatUstensils=recupUstensils.flat(); // concatener
-const setUstensils=new Set(flatUstensils);
+const setUstensils=new Set(flatUstensils); // nettoyer les doublons
+// liste des ustensils triés
 let arrayUstensils=[...setUstensils];
 arrayUstensils.sort((a,b)=>a.localeCompare(b));
 console.log(arrayUstensils);
 // affichage choix
 let eachUstensils ='';
 arrayUstensils.forEach(ustensils => {eachUstensils += `<option value="${ustensils}">${ustensils}</option>`});
-console.log(eachUstensils);
 document.getElementById("filtres-ustensiles").innerHTML=eachUstensils;
 
 
