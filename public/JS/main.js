@@ -14,10 +14,10 @@ console.table(recipes);
 // console.log(recette);
 
 // set d'ingrédients
-const recupIngredients=[];
+const recupIngredients=[]; // ingrédients de chaque recette
 recipes.forEach(recipe => recupIngredients.push(recipe.ingredients));
 console.log(recupIngredients);
-let flatIngredients=recupIngredients.flat(1); // concatener
+let flatIngredients=recupIngredients.flat(1); // concatener (tous les ingrédients)
 console.log(flatIngredients);
 const listIngredients=[];
 flatIngredients.forEach(ing => listIngredients.push(ing.ingredient));
@@ -32,6 +32,7 @@ let eachIngredient ='';
 arrayIngredients.forEach(ingredients => {eachIngredient += `<option value="${ingredients}">${ingredients}</option>`});
 document.getElementById("filtres-ingredients").innerHTML=eachIngredient;
 
+
 // liste d'appliance
 const setAppliance=recipes.reduce((acc,e)=>{return acc.add(e.appliance)}, new Set());
 let arrayAppliance=[...setAppliance]; // utilisation du spread sur le set pour creer le tableau
@@ -41,6 +42,7 @@ console.log(arrayAppliance);
 let eachAppliance ='';
 arrayAppliance.forEach(appliance => {eachAppliance += `<option value="${appliance}">${appliance}</option>`});
 document.getElementById("filtres-appareil").innerHTML=eachAppliance;
+
 
 // set d'ustensils
 const recupUstensils=[];
@@ -55,6 +57,71 @@ console.log(arrayUstensils);
 let eachUstensils ='';
 arrayUstensils.forEach(ustensils => {eachUstensils += `<option value="${ustensils}">${ustensils}</option>`});
 document.getElementById("filtres-ustensiles").innerHTML=eachUstensils;
+
+
+
+recupIngredients.forEach(e => e.forEach(i => console.log("<strong>"+i.ingredient+":</strong>"+i.quantity+i.unit)));
+
+let eachName ='';
+recipes.forEach(recipe => {eachName += `
+<div class="bloc-recette" id="recipe${recipe.id}">
+    <div class="img">
+        <img class="image" src="" alt="" title="">
+    </div>
+    <div class="recette">
+        <div class="titre">${recipe.name}</div>
+        <p class="duree"><i class="far fa-clock"></i>${recipe.time} mn</p>
+        <div class="ingredients"><strong>${recipe.ingredients[0].ingredient} :</strong> ${recipe.ingredients[0].quantity}${recipe.ingredients[0].unit}</div>
+        <div class="description">${recipe.description}</div>
+    </div>
+</div>
+`
+});
+document.getElementById("recettes").innerHTML=eachName;
+
+const length = recipes.length
+console.log(length);
+
+function liste() {
+let liste = "";
+for(var i = 0; i < length; i++){
+    liste += recipe.ingredients[i].ingredient+"\n";
+    console.log(liste);
+}
+return liste;
+};
+
+// 1 recherche dans classes des fiches
+
+// 2 recherche dans tableau
+
+
+// // //surveille la recherche
+// const rechercheTexte = document.getElementById('recherche__texte');
+// rechercheTexte.addEventListener('input',function recherche(){
+//     if ()
+// });
+
+// function recherche() {}
+
+// const recipesName = recipes.map(recipe => recipe.name); 
+
+// afficher les ingrédients
+// let listeIngredients = ingredients.map(e => ingredients + ": " quantity + unit);
+
+// // filtrer (ingredientsFiltres= tous les éléments du tableau ingrédients moins l'elementdufiltre )
+// let ingredientsFiltres = ingredients.filter(function(ingrdient) {
+//     if(ingredient != "elementdufiltre"){
+//         return true; // ou: return ingrédient;
+//     }
+// })
+// = si un seul parametre
+// let ingredientsFiltres = ingredients.filter(function(ingrdient) {
+//     if(ingredient != "elementdufiltre"){
+//         return true; // ou: return ingrédient;
+//     }
+// })
+
 
 
 
@@ -87,58 +154,3 @@ document.getElementById("filtres-ustensiles").innerHTML=eachUstensils;
 //     }
 // }
 // window.customElements.define('fiche-recette',FicheRecetteElement);
-
-let eachName ='';
-recipes.forEach(recipe => {eachName += `
-<div class="bloc-recette">
-    <div class="img">
-        <img class="image" src="" alt="" title="">
-    </div>
-    <div class="recette">
-        <div class="titre">${recipe.name}</div>
-        <p class="duree"><i class="far fa-clock"></i>${recipe.time} mn</p>
-        <div class="ingredients">${recipe.ingredients[0].ingredient}: ${recipe.ingredients[0].quantity}${recipe.ingredients[0].unit}</div>
-        <div class="description">${recipe.description}</div>
-    </div>
-</div>
-`
-});
-document.getElementById("recettes").innerHTML=eachName;
-
-const length = recipes.length
-console.log(length);
-
-function liste() {
-let liste = "";
-for(var i = 0; i < length; i++){
-    liste += recipe.ingredients[i].ingredient+"\n";
-    console.log(liste);
-}
-return liste;
-};
-
-// // //surveille la recherche
-// const rechercheTexte = document.getElementById('recherche__texte');
-// rechercheTexte.addEventListener('input',function recherche(){
-//     if ()
-// });
-
-// function recherche() {}
-
-// const recipesName = recipes.map(recipe => recipe.name); 
-
-// afficher les ingrédients
-// let listeIngredients = ingredients.map(e => ingredients + ": " quantity + unit);
-
-// // filtrer (ingredientsFiltres= tous les éléments du tableau ingrédients moins l'elementdufiltre )
-// let ingredientsFiltres = ingredients.filter(function(ingrdient) {
-//     if(ingredient != "elementdufiltre"){
-//         return true; // ou: return ingrédient;
-//     }
-// })
-// = si un seul parametre
-// let ingredientsFiltres = ingredients.filter(function(ingrdient) {
-//     if(ingredient != "elementdufiltre"){
-//         return true; // ou: return ingrédient;
-//     }
-// })
