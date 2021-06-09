@@ -13,7 +13,7 @@ console.table(recipes);
 // recipes.forEach((recipe) => const recette = recipe.name);
 // console.log(recette);
 
-// Ingrédients
+// Ingredients
 const recupIngredients=[]; // ingrédients de chaque recette
 recipes.forEach(recipe => recupIngredients.push(recipe.ingredients));
 console.log(recupIngredients);
@@ -30,7 +30,6 @@ console.log(listIngredients);
 let eachIngredient ='';
 listIngredients.forEach(ingredients => {eachIngredient += `<option value="${ingredients}">${ingredients}</option>`});
 document.getElementById("filtres-ingredients").innerHTML=eachIngredient;
-
 
 // Appliance
 let listAppliance=[]; //liste des appliances
@@ -75,13 +74,37 @@ recipes.forEach(recipe => {eachName += `
     <div class="recette">
         <div class="titre">${recipe.name}</div>
         <p class="duree"><i class="far fa-clock"></i>${recipe.time} mn</p>
-        <div class="ingredients"><strong>${recipe.ingredients[0].ingredient} :</strong> ${recipe.ingredients[0].quantity}${recipe.ingredients[0].unit}</div>
+        <ul class="ingredients">${listOfIngredients(recipe.ingredients)}</ul>
         <div class="description">${recipe.description}</div>
     </div>
 </div>
 `
 });
 document.getElementById("recettes").innerHTML=eachName;
+
+// Ingrédients d'une recette
+function listOfIngredients(recipeIngredients) {
+    let ingredientsNeeded = '';
+    recipeIngredients.forEach(e => {
+        let ingredientQuantity; // check quantity
+        if(e.quantity) {
+            ingredientQuantity = " : " + e.quantity
+        } else {
+            ingredientQuantity = ''
+        }
+        let ingredientUnit; // check unit
+        if(e.unit) {
+            ingredientUnit = e.unit
+        } else {
+            ingredientUnit = ''
+        }
+        ingredientsNeeded += '<li><strong>' + e.ingredient + '</strong> '+ ingredientQuantity + '  ' + ingredientUnit + '</li>' // chaque ingrédient
+    });
+    return ingredientsNeeded;
+};
+
+
+
 
 const length = recipes.length
 console.log(length);
