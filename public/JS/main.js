@@ -1,20 +1,16 @@
 import {recipes} from './recipes.js'; 
 console.table(recipes);
 
-// let idName1 = recipes[0].name;
-// console.log(idName1);
-
 // recipes.forEach(recipe => console.log(recipe));
 // recipes.forEach(recipe => console.log(recipe.name));
 // recipes.forEach(recipe => console.log(recipe.ingredients));
 // recipes.forEach(recipe => console.log(recipe.description));
 // recipes.forEach(recipe => console.log(recipe.appliance));
 // recipes.forEach(recipe => console.log(recipe.ustensils));
-// recipes.forEach((recipe) => const recette = recipe.name);
 // console.log(recette);
 
 // Ingredients
-const recupIngredients=[]; // ingrédients de chaque recette
+const recupIngredients=[]; // ingrédients de chaque recette'
 recipes.forEach(recipe => recupIngredients.push(recipe.ingredients));
 console.log(recupIngredients);
 // console.log(flatIngredients);
@@ -30,6 +26,7 @@ console.log(listIngredients);
 let eachIngredient ='';
 listIngredients.forEach(ingredients => {eachIngredient += `<option value="${ingredients}">${ingredients}</option>`});
 document.getElementById("filtres-ingredients").innerHTML=eachIngredient;
+
 
 // Appliance
 let listAppliance=[]; //liste des appliances
@@ -63,8 +60,6 @@ listUstensils.forEach(ustensils => {showUstensils += `<option value="${ustensils
 document.getElementById("filtres-ustensiles").innerHTML=showUstensils;
 
 
-// recupIngredients.forEach(e => e.forEach(i => console.log("<strong>"+i.ingredient+":</strong>"+i.quantity+i.unit)));
-
 let eachName ='';
 recipes.forEach(recipe => {eachName += `
 <div class="bloc-recette" id="recipe${recipe.id}">
@@ -81,6 +76,19 @@ recipes.forEach(recipe => {eachName += `
 `
 });
 document.getElementById("recettes").innerHTML=eachName;
+
+
+let searchBarId = document.getElementById("search-text");
+searchBarId.addEventListener("input", function(e) {
+    let searchRegex = /^\S{3,30}$/; // \S ou [a-zA-Z]+cara spé?
+    let searchText = e.target.value;
+    if (searchRegex.test(searchText) === true) {
+        console.log("ok");
+    } else {
+        console.log("nok");
+    }
+});
+
 
 // Ingrédients d'une recette
 function listOfIngredients(recipeIngredients) {
@@ -122,6 +130,8 @@ return liste;
 
 // 2 recherche dans tableau
 
+
+// recupIngredients.forEach(e => e.forEach(i => console.log("<strong>"+i.ingredient+":</strong>"+i.quantity+i.unit)));
 
 // // //surveille la recherche
 // const rechercheTexte = document.getElementById('recherche__texte');
