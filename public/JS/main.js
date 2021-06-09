@@ -13,28 +13,27 @@ console.table(recipes);
 // recipes.forEach((recipe) => const recette = recipe.name);
 // console.log(recette);
 
-// set d'ingrédients
+// Ingrédients
 const recupIngredients=[]; // ingrédients de chaque recette
 recipes.forEach(recipe => recupIngredients.push(recipe.ingredients));
 console.log(recupIngredients);
-let flatIngredients=recupIngredients.flat(1); // concatener (tous les ingrédients)
-console.log(flatIngredients);
+// console.log(flatIngredients);
 const listIngredients=[];
-flatIngredients.forEach(ing => listIngredients.push(ing.ingredient));
-console.log(listIngredients);
-const setIngredients=new Set(listIngredients); // nettoyer les doublons
+recupIngredients.flat(1).forEach(ingredients => {
+    if (!listIngredients.includes(ingredients.ingredient)) { // eviter les doublons
+        listIngredients.push(ingredients.ingredient)}
+});
 // liste des ingredients triés
-let arrayIngredients=[...setIngredients];
-arrayIngredients.sort((a,b)=>a.localeCompare(b));
-console.log(arrayIngredients);
+listIngredients.sort((a,b)=>a.localeCompare(b));
+console.log(listIngredients);
 // affichage choix
 let eachIngredient ='';
-arrayIngredients.forEach(ingredients => {eachIngredient += `<option value="${ingredients}">${ingredients}</option>`});
+listIngredients.forEach(ingredients => {eachIngredient += `<option value="${ingredients}">${ingredients}</option>`});
 document.getElementById("filtres-ingredients").innerHTML=eachIngredient;
 
 
-// liste d'appliance
-let listAppliance=[];
+// Appliance
+let listAppliance=[]; //liste des appliances
 recipes.forEach(recipe => {
     if (!listAppliance.includes(recipe.appliance)) { // eviter les doublons
         listAppliance.push(recipe.appliance)}
@@ -47,7 +46,7 @@ listAppliance.forEach(appliance => {showAppliance += `<option value="${appliance
 document.getElementById("filtres-appareil").innerHTML=showAppliance;
 
 
-// d'ustensils par recette
+// Ustensils
 let arrayUstensils=[];
 recipes.forEach(recipe => arrayUstensils.push(recipe.ustensils));
 console.log(arrayUstensils);
