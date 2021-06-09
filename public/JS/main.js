@@ -34,33 +34,38 @@ document.getElementById("filtres-ingredients").innerHTML=eachIngredient;
 
 
 // liste d'appliance
-const setAppliance=recipes.reduce((acc,e)=>{return acc.add(e.appliance)}, new Set());
-let arrayAppliance=[...setAppliance]; // utilisation du spread sur le set pour creer le tableau
-arrayAppliance.sort((a,b)=>a.localeCompare(b));
-console.log(arrayAppliance);
+let listAppliance=[];
+recipes.forEach(recipe => {
+    if (!listAppliance.includes(recipe.appliance)) { // eviter les doublons
+        listAppliance.push(recipe.appliance)}
+});
+listAppliance.sort((a,b)=>a.localeCompare(b))
+console.log(listAppliance);
 // affichage choix
-let eachAppliance ='';
-arrayAppliance.forEach(appliance => {eachAppliance += `<option value="${appliance}">${appliance}</option>`});
-document.getElementById("filtres-appareil").innerHTML=eachAppliance;
+let showAppliance ='';
+listAppliance.forEach(appliance => {showAppliance += `<option value="${appliance}">${appliance}</option>`});
+document.getElementById("filtres-appareil").innerHTML=showAppliance;
 
 
-// set d'ustensils
-const recupUstensils=[];
-recipes.forEach(recipe => recupUstensils.push(recipe.ustensils));
-let flatUstensils=recupUstensils.flat(); // concatener
-const setUstensils=new Set(flatUstensils); // nettoyer les doublons
-// liste des ustensils triés
-let arrayUstensils=[...setUstensils];
-arrayUstensils.sort((a,b)=>a.localeCompare(b));
+// d'ustensils par recette
+let arrayUstensils=[];
+recipes.forEach(recipe => arrayUstensils.push(recipe.ustensils));
 console.log(arrayUstensils);
+// liste d'ustensils
+let listUstensils=[];
+arrayUstensils.flat().forEach(ustensil => {
+    if (!listUstensils.includes(ustensil)) { // eviter les doublons
+        listUstensils.push(ustensil)}
+});
+listUstensils.sort((a,b)=>a.localeCompare(b));
+console.log(listUstensils);
 // affichage choix
-let eachUstensils ='';
-arrayUstensils.forEach(ustensils => {eachUstensils += `<option value="${ustensils}">${ustensils}</option>`});
-document.getElementById("filtres-ustensiles").innerHTML=eachUstensils;
+let showUstensils ='';
+listUstensils.forEach(ustensils => {showUstensils += `<option value="${ustensils}">${ustensils}</option>`});
+document.getElementById("filtres-ustensiles").innerHTML=showUstensils;
 
 
-
-recupIngredients.forEach(e => e.forEach(i => console.log("<strong>"+i.ingredient+":</strong>"+i.quantity+i.unit)));
+// recupIngredients.forEach(e => e.forEach(i => console.log("<strong>"+i.ingredient+":</strong>"+i.quantity+i.unit)));
 
 let eachName ='';
 recipes.forEach(recipe => {eachName += `
