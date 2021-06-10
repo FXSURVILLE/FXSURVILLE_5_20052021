@@ -26,35 +26,51 @@
 
 
 .filtres {
-    padding-left: 1%;
+    padding-left: 5%;
     &__select {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        @include flex-row;
         .selected {
             @include center-vert;
             margin: 1%;
             padding-left: 5px;
             width: fit-content;
             border-radius: 5px;
-            background-color: $color-ingredients;
             .fa-times-circle {
                 padding: 5px;
             }
         }
     }
     &__choix {
-        @include filtres;
+        @include flex-row;
+        .box-choix {
+            margin: 1%;
+            border-radius: 5px;
+            width: min-content;
+            .choix {
+                @include filtres;
+                background-color: transparent;
+            }
+        }
+    }
+    .new-choice {
+        @include flex-row;
+        width: 667px;
     }
 }
-#filtres-ingredients {
+#ingredient-list , .ingredient {
     background-color: $color-ingredients;
 }
-#filtres-appareil {
+#appareil-list , .appareil {
     background-color: $color-appareil;
 }
-#filtres-ustensiles {
+#ustensiles-list , .ustensiles {
     background-color: $color-ustensiles;
+}
+
+.ingredient .choice , .appareil .choice , .ustensiles .choice {
+    width: 212px;
+    list-style: none;
+    padding: 5px 0px 5px 10px;
 }
 
 #recettes {

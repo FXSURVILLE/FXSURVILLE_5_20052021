@@ -20,26 +20,20 @@
             <input type="text" class="recherche__texte" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" id="search-text" maxlength="30">
             <i class="fas fa-search"></i>
         </div>
-        <div class="filtres">
-            <div class="filtres__select">
-                <div class="selected">zegrhsdsd<i class="far fa-times-circle"></i></div>
-                <div class="selected">zegrhsdsd<i class="far fa-times-circle"></i></div>
+    </section>
+    <section class="filtres">
+        <div class="filtres__select" id="tag">
+        </div>
+        <div class="filtres__choix">
+            <div class="box-choix ingredient">
+                <input class="choix" placeholder="ingredients" id="ingredient"></input>
             </div>
-            <select class='filtres__choix' id="filtres-ingredients">
-                <option value="">ingredients</option>
-                <option value="dog">Dog</option>
-                <option value="cat">Cat</option>
-            </select>
-            <select class='filtres__choix' id="filtres-appareil">
-                <option value="">appareil</option>
-                <option value="hamster">Hamster</option>
-                <option value="parrot">Parrot</option>
-            </select>
-            <select class='filtres__choix' id="filtres-ustensiles">
-                <option value="">ustensiles</option>
-                <option value="spider">Spider</option>
-                <option value="goldfish">Goldfish</option>
-            </select>
+            <div class="box-choix appareil">
+                <input class="choix" placeholder="appareil" id="appareil"></input>
+            </div>
+            <div class="box-choix ustensiles">
+                <input class="choix" placeholder="ustensiles" id="ustensiles"></input>
+            </div>
         </div>
     </section>
     <section id="recettes">

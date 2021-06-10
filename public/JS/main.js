@@ -23,9 +23,9 @@ recupIngredients.flat(1).forEach(ingredients => {
 listIngredients.sort((a,b)=>a.localeCompare(b));
 console.log(listIngredients);
 // affichage choix
-let eachIngredient ='';
-listIngredients.forEach(ingredients => {eachIngredient += `<option value="${ingredients}">${ingredients}</option>`});
-document.getElementById("filtres-ingredients").innerHTML=eachIngredient;
+// let eachIngredient ='';
+// listIngredients.forEach(ingredients => {eachIngredient += `<option value="${ingredients}">${ingredients}</option>`});
+// document.getElementById("filtres-ingredients").innerHTML=eachIngredient;
 
 
 // Appliance
@@ -37,9 +37,9 @@ recipes.forEach(recipe => {
 listAppliance.sort((a,b)=>a.localeCompare(b))
 console.log(listAppliance);
 // affichage choix
-let showAppliance ='';
-listAppliance.forEach(appliance => {showAppliance += `<option value="${appliance}">${appliance}</option>`});
-document.getElementById("filtres-appareil").innerHTML=showAppliance;
+// let showAppliance ='';
+// listAppliance.forEach(appliance => {showAppliance += `<option value="${appliance}">${appliance}</option>`});
+// document.getElementById("filtres-appareil").innerHTML=showAppliance;
 
 
 // Ustensils
@@ -55,9 +55,9 @@ arrayUstensils.flat().forEach(ustensil => {
 listUstensils.sort((a,b)=>a.localeCompare(b));
 console.log(listUstensils);
 // affichage choix
-let showUstensils ='';
-listUstensils.forEach(ustensils => {showUstensils += `<option value="${ustensils}">${ustensils}</option>`});
-document.getElementById("filtres-ustensiles").innerHTML=showUstensils;
+// let showUstensils ='';
+// listUstensils.forEach(ustensils => {showUstensils += `<option value="${ustensils}">${ustensils}</option>`});
+// document.getElementById("filtres-ustensiles").innerHTML=showUstensils;
 
 
 let eachName ='';
@@ -84,10 +84,18 @@ searchBarId.addEventListener("input", function(e) {
     let searchText = e.target.value;
     if (searchRegex.test(searchText) === true) {
         console.log("ok");
+        const result = recupIngredients[0].filter(
+            (e) => e.ingredient == searchText       // tri sur grammes
+        );
+        console.log(searchText);
+        console.log(result);
     } else {
         console.log("nok");
     }
 });
+
+
+// foreach if regex= name let id 
 
 
 // Ingrédients d'une recette
@@ -147,7 +155,7 @@ return liste;
 // let listeIngredients = ingredients.map(e => ingredients + ": " quantity + unit);
 
 // // filtrer (ingredientsFiltres= tous les éléments du tableau ingrédients moins l'elementdufiltre )
-// let ingredientsFiltres = ingredients.filter(function(ingrdient) {
+// let ingredientsFiltres = ingredients.filter(function(ingredient) {
 //     if(ingredient != "elementdufiltre"){
 //         return true; // ou: return ingrédient;
 //     }
@@ -159,13 +167,6 @@ return liste;
 //     }
 // })
 
-
-
-
-// const setUstensils=recipes.reduce((acc,e)=>{return acc.add(e.appliance)}, new Set());
-// let arrayList=[...setUstensils] // utilisation du spread sur le set pour creer le tableau
-// arrayList.sort((a,b)=>a.localeCompare(b));
-// console.log(arrayList);
 
 // class FicheRecetteElement extends HTMLElement {
 //     constructor(){
@@ -191,3 +192,69 @@ return liste;
 //     }
 // }
 // window.customElements.define('fiche-recette',FicheRecetteElement);
+
+function autocomplete(inp, arr) {
+    // listener de la recherche
+    inp.addEventListener("input", function(e) {
+        let a, b, i, val = this.value;
+        // si liste déja onverte, la ferme
+        closeAllLists();
+        if (!val) { return false;}
+        // creation de la div pour la liste
+        a = document.createElement("ul");
+        a.setAttribute("id", this.id + "-list");
+        a.setAttribute("class", "new-choice");
+        // ajoute ul
+        this.parentNode.appendChild(a);
+        // pour chaque item du tableau
+        for (i = 0; i < arr.length; i++) {
+        //   Controler si le texte commence par la ref
+          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            // creation div pour chaque ref trouvée
+            b = document.createElement("li");
+            b.setAttribute("class", this.id + " choice");
+            //recup classe pour config tag
+            let classe = this.id;
+            // surbrillance du texte cherché
+            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML += arr[i].substr(val.length);
+            // ajoute type + valeur
+            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            // fonction pour le clic de l'élément
+            b.addEventListener("click", function(e) {
+                // récupere le texte de la cible
+                let choice = this.getElementsByTagName("input")[0].value;
+                // mise en forme du tag
+                let tag = `<div class="${classe} selected">${choice}<i class="far fa-times-circle"></i></div>`
+                // ajout d'un tag
+                document.getElementById("tag").innerHTML+=tag;
+                // fermeture de la liste
+                closeAllLists();
+            });
+            // ajoute les li à ul
+            a.appendChild(b);
+          }
+        }
+    });
+    function closeAllLists(elmnt) {
+      /*close all autocomplete lists in the document,
+      except the one passed as an argument:*/
+      var x = document.getElementsByClassName("new-choice");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+          x[i].parentNode.removeChild(x[i]);
+        }
+      }
+    }
+    // /*execute a function when someone clicks in the document:*/
+    // document.addEventListener("click", function (e) {
+    //     closeAllLists(e.target);
+    // });
+  }
+  
+//   champs de selection
+  autocomplete(document.getElementById("ingredient"), listIngredients);
+
+  autocomplete(document.getElementById("appareil"), listAppliance);
+
+  autocomplete(document.getElementById("ustensiles"), listUstensils);
