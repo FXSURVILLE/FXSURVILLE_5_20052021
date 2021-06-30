@@ -13,8 +13,7 @@ console.table(recipes);
 const recupIngredients=[]; // ingrédients de chaque recette'
 recipes.forEach(recipe => recupIngredients.push(recipe.ingredients));
 console.log(recupIngredients);
-// console.log(flatIngredients);
-const listIngredients=[];
+let listIngredients=[];
 recupIngredients.flat(1).forEach(ingredients => {
     if (!listIngredients.includes(ingredients.ingredient)) { // eviter les doublons
         listIngredients.push(ingredients.ingredient)}
@@ -22,24 +21,17 @@ recupIngredients.flat(1).forEach(ingredients => {
 // liste des ingredients triés
 listIngredients.sort((a,b)=>a.localeCompare(b));
 console.log(listIngredients);
-// affichage choix
-// let eachIngredient ='';
-// listIngredients.forEach(ingredients => {eachIngredient += `<option value="${ingredients}">${ingredients}</option>`});
-// document.getElementById("filtres-ingredients").innerHTML=eachIngredient;
 
 
-// Appliance
+// Appliance(appareils)
 let listAppliance=[]; //liste des appliances
 recipes.forEach(recipe => {
     if (!listAppliance.includes(recipe.appliance)) { // eviter les doublons
         listAppliance.push(recipe.appliance)}
 });
+// liste des appareils triés
 listAppliance.sort((a,b)=>a.localeCompare(b))
 console.log(listAppliance);
-// affichage choix
-// let showAppliance ='';
-// listAppliance.forEach(appliance => {showAppliance += `<option value="${appliance}">${appliance}</option>`});
-// document.getElementById("filtres-appareil").innerHTML=showAppliance;
 
 
 // Ustensils
@@ -52,14 +44,11 @@ arrayUstensils.flat().forEach(ustensil => {
     if (!listUstensils.includes(ustensil)) { // eviter les doublons
         listUstensils.push(ustensil)}
 });
+// liste des Ustensils triés
 listUstensils.sort((a,b)=>a.localeCompare(b));
 console.log(listUstensils);
-// affichage choix
-// let showUstensils ='';
-// listUstensils.forEach(ustensils => {showUstensils += `<option value="${ustensils}">${ustensils}</option>`});
-// document.getElementById("filtres-ustensiles").innerHTML=showUstensils;
 
-
+//création des fiches recette
 let eachName ='';
 recipes.forEach(recipe => {eachName += `
 <div class="bloc-recette" id="recipe${recipe.id}">
@@ -114,25 +103,25 @@ function listOfIngredients(recipeIngredients) {
         } else {
             ingredientUnit = ''
         }
-        ingredientsNeeded += '<li><strong>' + e.ingredient + '</strong> '+ ingredientQuantity + '  ' + ingredientUnit + '</li>' // chaque ingrédient
+        ingredientsNeeded += '<li><strong>' + e.ingredient + '</strong> '+ ingredientQuantity + '  ' + ingredientUnit + '</li>' // mise en forme ingrédient
     });
     return ingredientsNeeded;
 };
 
+// // Nombre de recettes
+// const length = recipes.length
+// console.log(length);
 
+// function liste() {
+// let liste = "";
+// for(var i = 0; i < length; i++){
+//     liste += recipes.ingredients[i].ingredient+"\n";
+//     console.log(liste);
+// }
+// return liste;
+// };
 
-
-const length = recipes.length
-console.log(length);
-
-function liste() {
-let liste = "";
-for(var i = 0; i < length; i++){
-    liste += recipe.ingredients[i].ingredient+"\n";
-    console.log(liste);
-}
-return liste;
-};
+// 0 recherche dans tout
 
 // 1 recherche dans classes des fiches
 
@@ -161,7 +150,7 @@ return liste;
 //     }
 // })
 // = si un seul parametre
-// let ingredientsFiltres = ingredients.filter(function(ingrdient) {
+// let ingredientsFiltres = ingredients.filter(function(ingredient) {
 //     if(ingredient != "elementdufiltre"){
 //         return true; // ou: return ingrédient;
 //     }
@@ -193,13 +182,19 @@ return liste;
 // }
 // window.customElements.define('fiche-recette',FicheRecetteElement);
 
+let idIngredient = document.getElementById("ingredient");
+let idAppareil = document.getElementById("appareil");
+let idUstensiles = document.getElementById("ustensiles");
+
+
+// creation des filtres
 function autocomplete(inp, arr) {
     // listener de la recherche
     inp.addEventListener("input", function(e) {
         let a, b, i, val = this.value;
         // si liste déja onverte, la ferme
         closeAllLists();
-        if (!val) { return false;}
+        // if (!val) { return false;}
         // creation de la div pour la liste
         a = document.createElement("ul");
         a.setAttribute("id", this.id + "-list");
@@ -225,7 +220,7 @@ function autocomplete(inp, arr) {
                 // récupere le texte de la cible
                 let choice = this.getElementsByTagName("input")[0].value;
                 // mise en forme du tag
-                let tag = `<div class="${classe} selected">${choice}<i class="far fa-times-circle"></i></div>`
+                let tag = `<li class="${classe} selected">${choice}<i class="far fa-times-circle"></i></li>`
                 // ajout d'un tag
                 document.getElementById("tag").innerHTML+=tag;
                 // fermeture de la liste
@@ -237,8 +232,7 @@ function autocomplete(inp, arr) {
         }
     });
     function closeAllLists(elmnt) {
-      /*close all autocomplete lists in the document,
-      except the one passed as an argument:*/
+      //ferme les listes, sauf celle active
       var x = document.getElementsByClassName("new-choice");
       for (var i = 0; i < x.length; i++) {
         if (elmnt != x[i] && elmnt != inp) {
@@ -246,15 +240,31 @@ function autocomplete(inp, arr) {
         }
       }
     }
-    // /*execute a function when someone clicks in the document:*/
-    // document.addEventListener("click", function (e) {
-    //     closeAllLists(e.target);
-    // });
+    //ferme la liste quand on clic ailleurs
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+        idIngredient.value = "";
+        idAppareil.value = "";
+        idUstensiles.value = "";
+    });
   }
+
+
+  //close tags
+  function closeTag(elmnt) {
+    var tag = document.getElementsByClassName("fa-times-circle"); //icone en cible
+    for (var i = 0; i < tag.length; i++) {
+      if (elmnt == tag[i]) {
+        tag[i].parentNode.remove(tag[i]);
+      }
+    }
+  }
+  //ferme au clic
+  document.addEventListener("click", function (e) {
+    closeTag(e.target);
+  });
   
 //   champs de selection
-  autocomplete(document.getElementById("ingredient"), listIngredients);
-
-  autocomplete(document.getElementById("appareil"), listAppliance);
-
-  autocomplete(document.getElementById("ustensiles"), listUstensils);
+  autocomplete(idIngredient, listIngredients);
+  autocomplete(idAppareil, listAppliance);
+  autocomplete(idUstensiles, listUstensils);
