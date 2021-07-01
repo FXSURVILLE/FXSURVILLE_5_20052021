@@ -73,18 +73,21 @@ searchBarId.addEventListener("input", function(e) {
     let searchText = e.target.value;
     if (searchRegex.test(searchText) === true) {
         console.log("ok");
-        const result = recupIngredients[0].filter(
-            (e) => e.ingredient == searchText       // tri sur grammes
-        );
+        let result = recipes[0].description.includes(searchText);
+        // const result = recupIngredients[0].filter(
+        //     (e) => e.ingredient == searchText       // tri sur ingredients
+        // );
         console.log(searchText);
         console.log(result);
+        console.log(recipes[0].description);
+        recipes.forEach(e => {
+            if (e.appliance.toLowerCase().includes(searchText)) { // recherche dans appareils
+                console.log('testok')}
+        });
     } else {
         console.log("nok");
     }
 });
-
-
-// foreach if regex= name let id 
 
 
 // Ingrédients d'une recette
@@ -111,6 +114,100 @@ function listOfIngredients(recipeIngredients) {
 // // Nombre de recettes
 // const length = recipes.length
 // console.log(length);
+
+
+let idIngredient = document.getElementById("ingredient");
+let idAppareil = document.getElementById("appareil");
+let idUstensiles = document.getElementById("ustensiles");
+
+
+// creation des filtres
+function autocomplete(inp, arr) {
+    // listener de la recherche
+    inp.addEventListener("input", function(e) {
+        let a, b, i, val = this.value;
+        // si liste déja onverte, la ferme
+        closeAllLists();
+        // if (!val) { return false;}
+        // creation de la div pour la liste
+        a = document.createElement("ul");
+        a.setAttribute("id", this.id + "-list");
+        a.setAttribute("class", "new-choice");
+        // ajoute ul
+        this.parentNode.appendChild(a);
+        // pour chaque item du tableau
+        for (i = 0; i < arr.length; i++) {
+        //   Controler si le texte commence par la ref
+          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            // creation div pour chaque ref trouvée
+            b = document.createElement("li");
+            b.setAttribute("class", this.id + " choice");
+            //recup classe pour config tag
+            let classe = this.id;
+            // surbrillance du texte cherché
+            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML += arr[i].substr(val.length);
+            // ajoute type + valeur
+            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            // fonction pour le clic de l'élément
+            b.addEventListener("click", function(e) {
+                // récupere le texte de la cible
+                let choice = this.getElementsByTagName("input")[0].value;
+                // mise en forme du tag
+                let tag = `<li class="${classe} selected">${choice}<i class="far fa-times-circle"></i></li>`
+                // ajout d'un tag
+                document.getElementById("tag").innerHTML+=tag;
+                // fermeture de la liste
+                closeAllLists();
+            });
+            // ajoute les li à ul
+            a.appendChild(b);
+          }
+        }
+    });
+    function closeAllLists(elmnt) {
+      //ferme les listes, sauf celle active
+      var x = document.getElementsByClassName("new-choice");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+          x[i].parentNode.removeChild(x[i]);
+        }
+      }
+    }
+    //ferme la liste quand on clic ailleurs
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+        idIngredient.value = "";
+        idAppareil.value = "";
+        idUstensiles.value = "";
+    });
+};
+
+
+//close tags
+function closeTag(elmnt) {
+    var tag = document.getElementsByClassName("fa-times-circle"); //icone en cible
+    for (var i = 0; i < tag.length; i++) {
+      if (elmnt == tag[i]) {
+        tag[i].parentNode.remove(tag[i]);
+      }
+    }
+}
+//ferme au clic
+  document.addEventListener("click", function (e) {
+    closeTag(e.target);
+});
+  
+//   champs de selection
+autocomplete(idIngredient, listIngredients);
+autocomplete(idAppareil, listAppliance);
+autocomplete(idUstensiles, listUstensils);
+
+
+
+
+// foreach if regex= name let id 
+
 
 // function liste() {
 // let liste = "";
@@ -181,90 +278,3 @@ function listOfIngredients(recipeIngredients) {
 //     }
 // }
 // window.customElements.define('fiche-recette',FicheRecetteElement);
-
-let idIngredient = document.getElementById("ingredient");
-let idAppareil = document.getElementById("appareil");
-let idUstensiles = document.getElementById("ustensiles");
-
-
-// creation des filtres
-function autocomplete(inp, arr) {
-    // listener de la recherche
-    inp.addEventListener("input", function(e) {
-        let a, b, i, val = this.value;
-        // si liste déja onverte, la ferme
-        closeAllLists();
-        // if (!val) { return false;}
-        // creation de la div pour la liste
-        a = document.createElement("ul");
-        a.setAttribute("id", this.id + "-list");
-        a.setAttribute("class", "new-choice");
-        // ajoute ul
-        this.parentNode.appendChild(a);
-        // pour chaque item du tableau
-        for (i = 0; i < arr.length; i++) {
-        //   Controler si le texte commence par la ref
-          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-            // creation div pour chaque ref trouvée
-            b = document.createElement("li");
-            b.setAttribute("class", this.id + " choice");
-            //recup classe pour config tag
-            let classe = this.id;
-            // surbrillance du texte cherché
-            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-            b.innerHTML += arr[i].substr(val.length);
-            // ajoute type + valeur
-            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-            // fonction pour le clic de l'élément
-            b.addEventListener("click", function(e) {
-                // récupere le texte de la cible
-                let choice = this.getElementsByTagName("input")[0].value;
-                // mise en forme du tag
-                let tag = `<li class="${classe} selected">${choice}<i class="far fa-times-circle"></i></li>`
-                // ajout d'un tag
-                document.getElementById("tag").innerHTML+=tag;
-                // fermeture de la liste
-                closeAllLists();
-            });
-            // ajoute les li à ul
-            a.appendChild(b);
-          }
-        }
-    });
-    function closeAllLists(elmnt) {
-      //ferme les listes, sauf celle active
-      var x = document.getElementsByClassName("new-choice");
-      for (var i = 0; i < x.length; i++) {
-        if (elmnt != x[i] && elmnt != inp) {
-          x[i].parentNode.removeChild(x[i]);
-        }
-      }
-    }
-    //ferme la liste quand on clic ailleurs
-    document.addEventListener("click", function (e) {
-        closeAllLists(e.target);
-        idIngredient.value = "";
-        idAppareil.value = "";
-        idUstensiles.value = "";
-    });
-  }
-
-
-  //close tags
-  function closeTag(elmnt) {
-    var tag = document.getElementsByClassName("fa-times-circle"); //icone en cible
-    for (var i = 0; i < tag.length; i++) {
-      if (elmnt == tag[i]) {
-        tag[i].parentNode.remove(tag[i]);
-      }
-    }
-  }
-  //ferme au clic
-  document.addEventListener("click", function (e) {
-    closeTag(e.target);
-  });
-  
-//   champs de selection
-  autocomplete(idIngredient, listIngredients);
-  autocomplete(idAppareil, listAppliance);
-  autocomplete(idUstensiles, listUstensils);
