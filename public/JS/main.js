@@ -1,5 +1,5 @@
 import {recipes} from './recipes.js'; 
-console.table(recipes);
+console.table(recipes); //tableau de recipes dans console
 
 // recipes.forEach(recipe => console.log(recipe));
 // recipes.forEach(recipe => console.log(recipe.name));
@@ -10,8 +10,7 @@ console.table(recipes);
 // console.log(recette);
 
 // Ingredients
-const recupIngredients=[]; // ingrédients de chaque recette'
-recipes.forEach(recipe => recupIngredients.push(recipe.ingredients));
+const recupIngredients=recipes.map(recipe => recipe.ingredients); // ingrédients de chaque recette'
 console.log(recupIngredients);
 let listIngredients=[];
 recupIngredients.flat(1).forEach(ingredients => {
@@ -35,8 +34,7 @@ console.log(listAppliance);
 
 
 // Ustensils
-let arrayUstensils=[];
-recipes.forEach(recipe => arrayUstensils.push(recipe.ustensils));
+let arrayUstensils=recipes.map(recipe => recipe.ustensils);
 console.log(arrayUstensils);
 // liste d'ustensils
 let listUstensils=[];
@@ -77,17 +75,60 @@ searchBarId.addEventListener("input", function(e) {
         // const result = recupIngredients[0].filter(
         //     (e) => e.ingredient == searchText       // tri sur ingredients
         // );
+
+        let indices=[];
+        // let idx = arrayAppliance.indexOf(searchText);
+        // console.log(idx);
+        // while (idx != -1) {
+        //   indices.push(idx);
+        //   idx = arrayAppliance.indexOf(searchText, idx + 1);
+        // }
+
         console.log(searchText);
         console.log(result);
         console.log(recipes[0].description);
+        // filterFunction();
         recipes.forEach(e => {
+            if (e.description.toLowerCase().includes(searchText)) { // recherche dans appareils
+                indices.push(e.id)};
             if (e.appliance.toLowerCase().includes(searchText)) { // recherche dans appareils
-                console.log('testok')}
+                indices.push(e.id);
+                console.log('testok')};
         });
+        console.log(indices);
     } else {
         console.log("nok");
     }
 });
+
+
+
+let searchAll=[];
+// searchAll += JSON.stringify(recipes[0].ingredients);
+// searchAll += JSON.stringify(recipes[0].description);
+// searchAll += JSON.stringify(recipes[0].appliance);
+// searchAll += JSON.stringify(recipes[0].ustensils);
+// console.log(searchAll);
+// recipes.forEach(e => searchAll.push(e.ingredients.forEach(i => i.ingredient)+e.description+e.appliance+e.ustensils));
+
+// tableau des ingredients
+const arrayIngredients=recipes.map(e=>e.ingredients.map(i=>i.ingredient))
+console.log(arrayIngredients);
+// tableau des appareils
+const arrayAppliance=recipes.map(e=>e.appliance)
+console.log(arrayAppliance);
+// tableau des descriptions
+const arrayDescription=recipes.map(e=>e.description)
+console.log(arrayDescription);
+
+function liste() {
+    let liste = "";
+    for(var i = 0; i < recipes.length; i++){
+        liste += recipes.ingredients[i].ingredient+"\n";
+        console.log(liste);
+    }
+    return liste;
+};
 
 
 // Ingrédients d'une recette
@@ -205,7 +246,6 @@ autocomplete(idUstensiles, listUstensils);
 
 
 
-
 // foreach if regex= name let id 
 
 
@@ -218,12 +258,29 @@ autocomplete(idUstensiles, listUstensils);
 // return liste;
 // };
 
+
+
+
 // 0 recherche dans tout
 
 // 1 recherche dans classes des fiches
 
-// 2 recherche dans tableau
+/*
+recherche
+concat ing+app+ust+recet
+if rech+tag false = all id
+forEach id concat
+if rech dans concat =true add id dans Set else remove id
+if tag dans array =true add id dans Set else remove id
+*/
 
+// 2 recherche dans tableau
+/*
+recherche
+foreach id rech if recet else ing else app else ust
+*/
+
+// let recupID=nomarray.map(e=>e.id) ?
 
 // recupIngredients.forEach(e => e.forEach(i => console.log("<strong>"+i.ingredient+":</strong>"+i.quantity+i.unit)));
 
@@ -278,3 +335,17 @@ autocomplete(idUstensiles, listUstensils);
 //     }
 // }
 // window.customElements.define('fiche-recette',FicheRecetteElement);
+
+
+
+// function filterFunction() {
+//     let indices=[];
+//     let test="four";
+//     let idx = arrayAppliance.indexOf(test);
+//     console.log(idx);
+//     while (idx != -1) {
+//       indices.push(idx);
+//       idx = arrayAppliance.indexOf(test, idx + 1);
+//     }
+//     console.log(indices);
+//   }
