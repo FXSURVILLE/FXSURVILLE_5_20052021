@@ -89,11 +89,17 @@ searchBarId.addEventListener("input", function(e) {
         console.log(recipes[0].description);
         // filterFunction();
         recipes.forEach(e => {
-            if (e.description.toLowerCase().includes(searchText)) { // recherche dans appareils
+            if (e.name.toLowerCase().includes(searchText)) { // recherche dans titre
                 indices.push(e.id)};
-            if (e.appliance.toLowerCase().includes(searchText)) { // recherche dans appareils
-                indices.push(e.id);
-                console.log('testok')};
+            if (e.description.toLowerCase().includes(searchText)) { // recherche dans description
+                indices.push(e.id)};
+            // if (e.appliance.toLowerCase().includes(searchText)) { // recherche dans appareils
+            //     indices.push(e.id);
+            //     console.log('testok')};
+            e.ingredients.forEach(ing=>{
+                if (ing.ingredient.toLowerCase().includes(searchText)) { // recherche dans titre
+                        indices.push(e.id)};
+            })
         });
         console.log(indices);
     } else {
@@ -101,7 +107,7 @@ searchBarId.addEventListener("input", function(e) {
     }
 });
 
-
+console.log(recipes[0].ingredients[0].ingredient)
 
 let searchAll=[];
 // searchAll += JSON.stringify(recipes[0].ingredients);
@@ -338,14 +344,3 @@ foreach id rech if recet else ing else app else ust
 
 
 
-// function filterFunction() {
-//     let indices=[];
-//     let test="four";
-//     let idx = arrayAppliance.indexOf(test);
-//     console.log(idx);
-//     while (idx != -1) {
-//       indices.push(idx);
-//       idx = arrayAppliance.indexOf(test, idx + 1);
-//     }
-//     console.log(indices);
-//   }
