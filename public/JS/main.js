@@ -1,6 +1,6 @@
 import {recipes} from './recipes.js'; 
 console.table(recipes); //tableau de recipes dans console
-
+fiches();
 // recipes.forEach(recipe => console.log(recipe));
 // recipes.forEach(recipe => console.log(recipe.name));
 // recipes.forEach(recipe => console.log(recipe.ingredients));
@@ -47,28 +47,31 @@ listUstensils.sort((a,b)=>a.localeCompare(b));
 console.log(listUstensils);
 
 //création des fiches recette
-let eachName ='';
-recipes.forEach(recipe => {eachName += `
-<div class="bloc-recette" id="recipe${recipe.id}">
-    <div class="img">
-        <img class="image" src="" alt="" title="">
+function fiches() {
+    let eachName ='';
+    recipes.forEach(recipe => {eachName += `
+    <div class="bloc-recette" id="${recipe.id}" display = "">
+        <div class="img">
+            <img class="image" src="" alt="" title="">
+        </div>
+        <div class="recette">
+            <div class="titre">${recipe.name}</div>
+            <p class="duree"><i class="far fa-clock"></i>${recipe.time} mn</p>
+            <ul class="ingredients">${listOfIngredients(recipe.ingredients)}</ul>
+            <div class="description">${recipe.description}</div>
+        </div>
     </div>
-    <div class="recette">
-        <div class="titre">${recipe.name}</div>
-        <p class="duree"><i class="far fa-clock"></i>${recipe.time} mn</p>
-        <ul class="ingredients">${listOfIngredients(recipe.ingredients)}</ul>
-        <div class="description">${recipe.description}</div>
-    </div>
-</div>
-`
-});
-document.getElementById("recettes").innerHTML=eachName;
+    `
+    });
+    document.getElementById("recettes").innerHTML=eachName;
+}
 
 
 let searchBarId = document.getElementById("search-text");
 searchBarId.addEventListener("input", function(e) {
     let searchRegex = /^\S{3,30}$/; // \S ou [a-zA-Z]+cara spé?
     let searchText = e.target.value;
+    let indices=[];    
     if (searchRegex.test(searchText) === true) {
         console.log("ok");
         let result = recipes[0].description.includes(searchText);
@@ -76,7 +79,6 @@ searchBarId.addEventListener("input", function(e) {
         //     (e) => e.ingredient == searchText       // tri sur ingredients
         // );
 
-        let indices=[];
         // let idx = arrayAppliance.indexOf(searchText);
         // console.log(idx);
         // while (idx != -1) {
@@ -102,12 +104,20 @@ searchBarId.addEventListener("input", function(e) {
             })
         });
         console.log(indices);
+        let setIndices = new Set(indices);
+        console.log(setIndices);
+        recipes.forEach(recipe=> {
+            if (setIndices.has(recipe.id)) {
+                document.getElementById(recipe.id).style.display = "";
+            } else {
+                document.getElementById(recipe.id).style.display = "none";
+            };
+        })
     } else {
-        console.log("nok");
+        fiches();
     }
 });
 
-console.log(recipes[0].ingredients[0].ingredient)
 
 let searchAll=[];
 // searchAll += JSON.stringify(recipes[0].ingredients);
