@@ -260,7 +260,10 @@ autocomplete(idIngredient, listIngredients);
 autocomplete(idAppareil, listAppliance);
 autocomplete(idUstensiles, listUstensils);
 
-
+let tagI = document.querySelectorAll(".ingredient");
+console.log(tagI);
+console.log(tagI.textContent);
+// console.log(tagI.item(0));
 
 // foreach if regex= name let id 
 
