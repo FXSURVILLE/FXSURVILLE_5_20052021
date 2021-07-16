@@ -46,6 +46,7 @@
             margin: 1%;
             border-radius: 5px;
             width: min-content;
+            position:relative;
             .choix {
                 @include filtres;
                 background-color: transparent;
@@ -57,6 +58,17 @@
         width: 667px;
     }
 }
+.fa-chevron-down {
+    position:absolute;
+    top:25px;
+    right:20px;
+}
+// .choix-tag {
+//     display: inline-flex;
+//     @include center-item;
+//     padding-right: 20px;
+// }
+
 #ingredient-list , .ingredient {
     background-color: $color-ingredients;
 }
@@ -116,4 +128,39 @@
             }
         }
     }
+}
+
+#ingredient {
+    &.up + .fas{
+        -webkit-transform:rotate(180deg); 
+        -moz-transform:rotate(180deg);
+        -o-transform:rotate(180deg); 
+        -ms-transform:rotate(180deg); 
+        transform:rotate(180deg);
+    }
+}
+#appareil {
+    &.up + .fas{
+        -webkit-transform:rotate(180deg); 
+        -moz-transform:rotate(180deg);
+        -o-transform:rotate(180deg); 
+        -ms-transform:rotate(180deg); 
+        transform:rotate(180deg);
+    }
+}
+#ustensiles {
+    &.up + .fas{
+        -webkit-transform:rotate(180deg); 
+        -moz-transform:rotate(180deg);
+        -o-transform:rotate(180deg); 
+        -ms-transform:rotate(180deg); 
+        transform:rotate(180deg);
+    }
+}
+.fas {
+    -webkit-transition:-webkit-transform 500ms; 
+    -moz-transition:-moz-transform 500ms;       
+    -o-transition:-o-transform 500ms;           
+    -ms-transition:-ms-transform 500ms;    
+    transition: transform 500ms ease-in-out;   
 }

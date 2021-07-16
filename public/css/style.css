@@ -57,6 +57,11 @@ figure {
   font-size: 12px;
 }
 
+.fa-chevron-down {
+  color: #ffffff;
+  font-size: 24px;
+}
+
 .accueil {
   display: flex;
   align-items: center;
@@ -143,6 +148,7 @@ footer nav .fas {
   margin: 1%;
   border-radius: 5px;
   width: min-content;
+  position: relative;
 }
 .filtres__choix .box-choix .choix {
   margin: 1%;
@@ -159,6 +165,12 @@ footer nav .fas {
   flex-direction: row;
   flex-wrap: wrap;
   width: 667px;
+}
+
+.fa-chevron-down {
+  position: absolute;
+  top: 25px;
+  right: 20px;
 }
 
 #ingredient-list, .ingredient {
@@ -239,6 +251,38 @@ footer nav .fas {
   text-overflow: ellipsis;
   height: 65%;
   margin: 0% 5% 0% 5%;
+}
+
+#ingredient.up + .fas {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+#appareil.up + .fas {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+#ustensiles.up + .fas {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.fas {
+  -webkit-transition: -webkit-transform 500ms;
+  -moz-transition: -moz-transform 500ms;
+  -o-transition: -o-transform 500ms;
+  -ms-transition: -ms-transform 500ms;
+  transition: transform 500ms ease-in-out;
 }
 
 @media all {

@@ -217,6 +217,7 @@ function listOfIngredients(recipeIngredients) {
 function autocomplete(inp, arr) {
     // listener de la recherche
     inp.addEventListener("input", function(e) {
+        inp.classList.add("up");
         let a, b, i, val = this.value;
         // si liste déja onverte, la ferme
         closeAllLists();
@@ -273,6 +274,9 @@ function autocomplete(inp, arr) {
         idIngredient.value = "";
         idAppareil.value = "";
         idUstensiles.value = "";
+        idIngredient.classList.remove("up");
+        idAppareil.classList.remove("up");
+        idUstensiles.classList.remove("up");
     });
 };
 
