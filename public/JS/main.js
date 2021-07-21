@@ -76,28 +76,6 @@ function majDropdown() {
 }
 
 
-// // Ingredients
-// const recupIngredients=recipes.map(recipe => recipe.ingredients); // ingrédients de chaque recette'
-// console.log(recupIngredients);
-// let listIngredients=[];
-// recupIngredients.flat(1).forEach(ingredients => {
-//     if (!listIngredients.includes(ingredients.ingredient)) { // eviter les doublons
-//         listIngredients.push(ingredients.ingredient)}
-// });
-// // liste des ingredients triés
-// listIngredients.sort((a,b)=>a.localeCompare(b));
-// console.log(listIngredients);
-
-
-// // Appliance(appareils)
-// let listAppliance=[]; //liste des appliances
-// recipes.forEach(recipe => {
-//     if (!listAppliance.includes(recipe.appliance)) { // eviter les doublons
-//         listAppliance.push(recipe.appliance)}
-// });
-// // liste des appareils triés
-// listAppliance.sort((a,b)=>a.localeCompare(b))
-// console.log(listAppliance);
 
 // *****tableaux simplifiés pour recherche*****
 // tableau des ingredients
@@ -110,19 +88,6 @@ console.log(arrayAppliance);
 // const arrayDescription=recipes.map(e=>e.description)
 // console.log(arrayDescription);
 
-
-// // Ustensils
-// let arrayUstensils=recipes.map(recipe => recipe.ustensils);
-// console.log(arrayUstensils);
-// // liste d'ustensils
-// let listUstensils=[];
-// arrayUstensils.flat().forEach(ustensil => {
-//     if (!listUstensils.includes(ustensil)) { // eviter les doublons
-//         listUstensils.push(ustensil)}
-// });
-// // liste des Ustensils triés
-// listUstensils.sort((a,b)=>a.localeCompare(b));
-// console.log(listUstensils);
 
 //création des fiches recette
 function fiches() {
@@ -294,38 +259,6 @@ function searchFusion() {
     })
 }
 
-// maj tableau suivant recherches
-// function idResults() {
-//     if (id2.length!=0) {   
-//         let a=idResult.filter(x => id2.includes(x));
-//         idResult=a;
-//         console.log(idResult);
-//     }else{
-//         alert ("vide");
-//     }
-//     if (id3.length!=0) {   
-//         let a=idResult.filter(x => id3.includes(x));
-//         idResult=a;
-//         console.log(idResult);
-//     }else{
-//         alert ("vide");
-//     }
-//     if (id4.length!=0) {   
-//         let a=idResult.filter(x => id4.includes(x));
-//         console.log(id4);
-//         idResult=a;
-//         console.log(idResult);
-//     }else{
-//         alert ("vide");
-//     }
-//     if (id5.length!=0) {   
-//         let a=idResult.filter(x => id5.includes(x));
-//         idResult=a;
-//         console.log(idResult);
-//     }else{
-//         alert ("vide");
-//     }
-// }
 
 
 // Ingrédients d'une recette
@@ -348,7 +281,6 @@ function listOfIngredients(recipeIngredients) {
     });
     return ingredientsNeeded;
 };
-
 
 
 
@@ -466,6 +398,7 @@ function storeTags() {
     console.log(ingTag);    console.log(appTag);    console.log(ustTag);
 }
 
+
 // console.log(document.getElementsByClassName('bloc-recette'));
 // function filtreFiches() {
 //     console.log(indices);
@@ -479,6 +412,40 @@ function storeTags() {
 //                 tr[i].style.display = "none";
 //             }
 //         }       
+//     }
+// }
+
+
+// maj tableau suivant recherches
+// function idResults() {
+//     if (id2.length!=0) {   
+//         let a=idResult.filter(x => id2.includes(x));
+//         idResult=a;
+//         console.log(idResult);
+//     }else{
+//         alert ("vide");
+//     }
+//     if (id3.length!=0) {   
+//         let a=idResult.filter(x => id3.includes(x));
+//         idResult=a;
+//         console.log(idResult);
+//     }else{
+//         alert ("vide");
+//     }
+//     if (id4.length!=0) {   
+//         let a=idResult.filter(x => id4.includes(x));
+//         console.log(id4);
+//         idResult=a;
+//         console.log(idResult);
+//     }else{
+//         alert ("vide");
+//     }
+//     if (id5.length!=0) {   
+//         let a=idResult.filter(x => id5.includes(x));
+//         idResult=a;
+//         console.log(idResult);
+//     }else{
+//         alert ("vide");
 //     }
 // }
 
@@ -609,3 +576,42 @@ foreach id rech if recet else ing else app else ust
 //     }
 //     return liste;
 // };
+
+
+
+// // Ingredients
+// const recupIngredients=recipes.map(recipe => recipe.ingredients); // ingrédients de chaque recette'
+// console.log(recupIngredients);
+// let listIngredients=[];
+// recupIngredients.flat(1).forEach(ingredients => {
+//     if (!listIngredients.includes(ingredients.ingredient)) { // eviter les doublons
+//         listIngredients.push(ingredients.ingredient)}
+// });
+// // liste des ingredients triés
+// listIngredients.sort((a,b)=>a.localeCompare(b));
+// console.log(listIngredients);
+
+
+// // Appliance(appareils)
+// let listAppliance=[]; //liste des appliances
+// recipes.forEach(recipe => {
+//     if (!listAppliance.includes(recipe.appliance)) { // eviter les doublons
+//         listAppliance.push(recipe.appliance)}
+// });
+// // liste des appareils triés
+// listAppliance.sort((a,b)=>a.localeCompare(b))
+// console.log(listAppliance);
+
+
+// // Ustensils
+// let arrayUstensils=recipes.map(recipe => recipe.ustensils);
+// console.log(arrayUstensils);
+// // liste d'ustensils
+// let listUstensils=[];
+// arrayUstensils.flat().forEach(ustensil => {
+//     if (!listUstensils.includes(ustensil)) { // eviter les doublons
+//         listUstensils.push(ustensil)}
+// });
+// // liste des Ustensils triés
+// listUstensils.sort((a,b)=>a.localeCompare(b));
+// console.log(listUstensils);
