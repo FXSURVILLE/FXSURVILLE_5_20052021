@@ -4,7 +4,7 @@ console.table(recipes); //tableau de recipes dans console
 // getElements du DOM
 const tags = document.getElementsByClassName("selected");
 const cross = document.getElementsByClassName("fa-times-circle");
-const blocRecette = document.getElementsByClassName("bloc-recette");
+// const blocRecette = document.getElementsByClassName("bloc-recette");
 const idIngredient = document.getElementById("ingredient");
 const idAppareil = document.getElementById("appareil");
 const idUstensiles = document.getElementById("ustensiles");
@@ -13,49 +13,93 @@ const searchBarId = document.getElementById("search-text");
 // let allId=[];
 // recipes.map(recipe => allId.push(recipe.id));
 // console.log(allId);
-let indices=[];    
-recipes.map(recipe => indices.push(recipe.id));
-console.log(indices);
+// let indices=[];    
+// recipes.map(recipe => indices.push(recipe.id));
+// console.log(indices);
 // tableaux de tags actifs
 let ingTag = [];
 let appTag = [];
 let ustTag = [];
-// résultat de la recherche
-let searchResult = [];
-// tableaux de recherches de tags
-let ingResult = [];
-let appResult = [];
-let ustResult = [];
-// tableau filtré
-let idResult = indices;
+// résultats
+let searchResult = []; // résultat de la recherche
+let ingResult = []; // résultat des tags ingredients
+let appResult = []; // résultat des tags appareils
+let ustResult = []; // résultat des tags ustensils
+// tableau d'indices filtré
+let idResult;
 
 // fonctions à lancer à l'ouverture
 fiches();
-
-// Ingredients
-const recupIngredients=recipes.map(recipe => recipe.ingredients); // ingrédients de chaque recette'
-console.log(recupIngredients);
-let listIngredients=[];
-recupIngredients.flat(1).forEach(ingredients => {
-    if (!listIngredients.includes(ingredients.ingredient)) { // eviter les doublons
-        listIngredients.push(ingredients.ingredient)}
-});
-// liste des ingredients triés
-listIngredients.sort((a,b)=>a.localeCompare(b));
-console.log(listIngredients);
+initIdResult();
 
 
-// Appliance(appareils)
-let listAppliance=[]; //liste des appliances
-recipes.forEach(recipe => {
-    if (!listAppliance.includes(recipe.appliance)) { // eviter les doublons
-        listAppliance.push(recipe.appliance)}
-});
-// liste des appareils triés
-listAppliance.sort((a,b)=>a.localeCompare(b))
-console.log(listAppliance);
+function initIdResult() {
+    idResult=recipes.map(recipe => recipe.id);
+};
+console.log(idResult);
+
+// listes dropdown
+let listIngredients;
+let listAppliance;
+let listUstensils;
+
+majDropdown();
+function majDropdown() {
+    let recupIngredients=[];
+    listAppliance=[];
+    let recupUstensils=[];
+    for (let i = 0; i < idResult.length; i++) {
+        recupIngredients.push(recipes[i].ingredients)
+        if (!listAppliance.includes(recipes[i].appliance)) { // eviter les doublons appareils
+            listAppliance.push(recipes[i].appliance)
+        }
+        recupUstensils.push(recipes[i].ustensils)
+    }
+    console.log(recupIngredients);
+    listIngredients=[];
+    recupIngredients.flat(1).forEach(ingredients => {
+        if (!listIngredients.includes(ingredients.ingredient)) { // eviter les doublons ingrédients
+            listIngredients.push(ingredients.ingredient)}
+    });
+    listUstensils=[];
+    recupUstensils.flat().forEach(ustensil => {
+        if (!listUstensils.includes(ustensil)) { // eviter les doublons ustensiles
+            listUstensils.push(ustensil)}
+    });
+    // listes triés
+    listIngredients.sort((a,b)=>a.localeCompare(b));
+    console.log(listIngredients);
+    listAppliance.sort((a,b)=>a.localeCompare(b))
+    console.log(listAppliance);
+    listUstensils.sort((a,b)=>a.localeCompare(b));
+    console.log(listUstensils);
+}
 
 
+// // Ingredients
+// const recupIngredients=recipes.map(recipe => recipe.ingredients); // ingrédients de chaque recette'
+// console.log(recupIngredients);
+// let listIngredients=[];
+// recupIngredients.flat(1).forEach(ingredients => {
+//     if (!listIngredients.includes(ingredients.ingredient)) { // eviter les doublons
+//         listIngredients.push(ingredients.ingredient)}
+// });
+// // liste des ingredients triés
+// listIngredients.sort((a,b)=>a.localeCompare(b));
+// console.log(listIngredients);
+
+
+// // Appliance(appareils)
+// let listAppliance=[]; //liste des appliances
+// recipes.forEach(recipe => {
+//     if (!listAppliance.includes(recipe.appliance)) { // eviter les doublons
+//         listAppliance.push(recipe.appliance)}
+// });
+// // liste des appareils triés
+// listAppliance.sort((a,b)=>a.localeCompare(b))
+// console.log(listAppliance);
+
+// *****tableaux simplifiés pour recherche*****
 // tableau des ingredients
 const arrayIngredients=recipes.map(e=>e.ingredients.map(i=>i.ingredient))
 console.log(arrayIngredients);
@@ -67,18 +111,18 @@ console.log(arrayAppliance);
 // console.log(arrayDescription);
 
 
-// Ustensils
-let arrayUstensils=recipes.map(recipe => recipe.ustensils);
-console.log(arrayUstensils);
-// liste d'ustensils
-let listUstensils=[];
-arrayUstensils.flat().forEach(ustensil => {
-    if (!listUstensils.includes(ustensil)) { // eviter les doublons
-        listUstensils.push(ustensil)}
-});
-// liste des Ustensils triés
-listUstensils.sort((a,b)=>a.localeCompare(b));
-console.log(listUstensils);
+// // Ustensils
+// let arrayUstensils=recipes.map(recipe => recipe.ustensils);
+// console.log(arrayUstensils);
+// // liste d'ustensils
+// let listUstensils=[];
+// arrayUstensils.flat().forEach(ustensil => {
+//     if (!listUstensils.includes(ustensil)) { // eviter les doublons
+//         listUstensils.push(ustensil)}
+// });
+// // liste des Ustensils triés
+// listUstensils.sort((a,b)=>a.localeCompare(b));
+// console.log(listUstensils);
 
 //création des fiches recette
 function fiches() {
@@ -126,6 +170,7 @@ searchBarId.addEventListener("input", function(e) {
             })
         });
         searchFusion()
+        majDropdown();
         // console.log(searchResult);
         // let setIndices = new Set(searchResult);
         // console.log(setIndices);
@@ -211,7 +256,7 @@ function rechTags() {
 
 // fusion des recherches
 function searchFusion() {
-    let idResult = indices;
+    initIdResult();
     if (ingTag.length!=0) {   
         let a=idResult.filter(x => ingResult.includes(x));
         idResult=a;
@@ -311,6 +356,8 @@ function listOfIngredients(recipeIngredients) {
 function autocomplete(inp, arr) {
     // listener de la recherche
     inp.addEventListener("input", function(e) {
+        console.log(listIngredients);
+        console.log(arr);
         inp.classList.add("up");
         let a, b, i, val = this.value;
         // si liste déja onverte, la ferme
@@ -347,6 +394,7 @@ function autocomplete(inp, arr) {
                 storeTags();
                 // fermeture de la liste
                 closeAllLists();
+                majDropdown();
             });
             // ajoute les li à ul
             a.appendChild(b);
