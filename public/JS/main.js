@@ -113,7 +113,7 @@ function fiches() {
 // zone de recherche
 searchBarId.addEventListener("input", function(e) {
     let searchRegex = /^.{3,}$/g; // \S ou [a-zA-Z]+cara spé?
-    let searchText = e.target.value;
+    let searchText = e.target.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     if (searchRegex.test(searchText) === true) {
         searchResult=[];
         recipes.forEach(e => {
