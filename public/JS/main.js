@@ -112,7 +112,7 @@ function fiches() {
 
 // zone de recherche
 searchBarId.addEventListener("input", function(e) {
-    let searchRegex = /^\S{3,30}$/g; // \S ou [a-zA-Z]+cara spé?
+    let searchRegex = /^.{3,}$/g; // \S ou [a-zA-Z]+cara spé?
     let searchText = e.target.value;
     if (searchRegex.test(searchText) === true) {
         searchResult=[];
