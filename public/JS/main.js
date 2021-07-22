@@ -122,17 +122,12 @@ searchBarId.addEventListener("input", function(e) {
     if (searchRegex.test(searchText)) {
         searchResult=[];
         for (let i = 0; i < arrSearch.length; i++) {
-            console.log(i)  
-            console.log(arrSearch[i]) 
-            console.log(searchText) 
             for (let j = 0; j < arrSearch[i].length; j++) {
                 let g=arrSearch[i][j].toLowerCase();
                 if (g.includes(searchText)) { // recherche globale
                     searchResult.push(i+1)
                 };
-                console.log(g)
-            }
-            console.log(searchResult)      
+            } 
         }
         searchFusion()
         majDropdown();
