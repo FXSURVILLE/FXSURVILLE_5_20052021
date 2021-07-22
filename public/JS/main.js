@@ -131,16 +131,6 @@ searchBarId.addEventListener("input", function(e) {
         });
         searchFusion()
         majDropdown();
-        // console.log(searchResult);
-        // let setIndices = new Set(searchResult);
-        // console.log(setIndices);
-        // recipes.forEach(recipe=> {
-        //     if (setIndices.has(recipe.id)) {
-        //         document.getElementById(recipe.id).style.display = "";
-        //     } else {
-        //         document.getElementById(recipe.id).style.display = "none";
-        //     };
-        // })
     } else {
         searchResult=[];
         recipes.map(recipe => searchResult.push(recipe.id));
@@ -150,10 +140,6 @@ searchBarId.addEventListener("input", function(e) {
 
 // recherche par les tags
 function rechTags() {
-    // indices=[];
-    // ingTag.map(e=> indices.push(arrayIngredients.forEach(arr=>arr.indexOf(e)+1)))
-    // appTag.map(e=> indices.push(arrayAppliance.indexOf(e)+1))
-    // ustTag.map(e=> indices.push(arrayAppliance.indexOf(e)+1))
     ingResult = [];
     appResult = [];
     ustResult = [];
@@ -205,13 +191,6 @@ function rechTags() {
         });
     }
     searchFusion()
-    // console.log(indices);
-    // fiches();
-    // for (let i = 1; i <= recipes.length; i++) {
-    //     document.getElementById(i).style.display = 'none';
-    // }
-    // recipes.forEach(id=> document.getElementById(id.id).style.display = 'none')
-    // indices.forEach(id=> document.getElementById(id).style.display = '')
 }
 
 // fusion des recherches
@@ -292,7 +271,6 @@ function autocomplete(inp, arr) {
         let a, b, i, val = this.value;
         // si liste déja onverte, la ferme
         closeAllLists();
-        // if (!val) { return false;}
         // creation de la div pour la liste
         a = document.createElement("ul");
         a.setAttribute("id", this.id + "-list");
@@ -613,3 +591,11 @@ foreach id rech if recet else ing else app else ust
 // // liste des Ustensils triés
 // listUstensils.sort((a,b)=>a.localeCompare(b));
 // console.log(listUstensils);
+
+// console.log(indices);
+// fiches();
+// for (let i = 1; i <= recipes.length; i++) {
+//     document.getElementById(i).style.display = 'none';
+// }
+// recipes.forEach(id=> document.getElementById(id.id).style.display = 'none')
+// indices.forEach(id=> document.getElementById(id).style.display = '')
