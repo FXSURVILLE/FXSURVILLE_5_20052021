@@ -9,13 +9,8 @@ const idIngredient = document.getElementById("ingredient");
 const idAppareil = document.getElementById("appareil");
 const idUstensiles = document.getElementById("ustensiles");
 const searchBarId = document.getElementById("search-text");
-// indices filtrés
-// let allId=[];
-// recipes.map(recipe => allId.push(recipe.id));
-// console.log(allId);
-// let indices=[];    
-// recipes.map(recipe => indices.push(recipe.id));
-// console.log(indices);
+// tableau recherches
+let arrSearch=[];
 // tableaux de tags actifs
 let ingTag = [];
 let appTag = [];
@@ -113,7 +108,7 @@ function fiches() {
 // zone de recherche
 searchBarId.addEventListener("input", function(e) {
     let searchRegex = /^.{3,}$/g; // \S ou [a-zA-Z]+cara spé?
-    let searchText = e.target.value;
+    let searchText = e.target.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     if (searchRegex.test(searchText) === true) {
         searchResult=[];
         recipes.forEach(e => {
