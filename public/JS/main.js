@@ -112,10 +112,9 @@ function fiches() {
 
 // zone de recherche
 searchBarId.addEventListener("input", function(e) {
-    let searchRegex = /^\S{3,30}$/; // \S ou [a-zA-Z]+cara spé?
+    let searchRegex = /^\S{3,30}$/g; // \S ou [a-zA-Z]+cara spé?
     let searchText = e.target.value;
     if (searchRegex.test(searchText) === true) {
-        console.log("ok");
         searchResult=[];
         recipes.forEach(e => {
             if (e.name.toLowerCase().includes(searchText)) { // recherche dans titre
@@ -133,6 +132,7 @@ searchBarId.addEventListener("input", function(e) {
                         searchResult.push(e.id)};
                     }
             })
+            console.log(searchResult)            
         });
         searchFusion()
         majDropdown();
@@ -249,6 +249,9 @@ function searchFusion() {
         console.log(idResult);
     }else{
         console.log("src vide");
+    }
+    if (ingTag.length+appTag.length+ustTag.length+searchResult.length==0) {
+        idResult=[];
     }
     recipes.forEach(recipe=> {
         if (idResult.includes(recipe.id)) {
