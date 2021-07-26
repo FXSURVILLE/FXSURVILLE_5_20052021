@@ -118,7 +118,9 @@ searchBarId.addEventListener("input", function(e) {
             for (let j = 0; j < arrSearch[i].length; j++) {
                 let g=arrSearch[i][j].toLowerCase();
                 if (g.includes(searchText)) { // recherche globale
-                    searchResult.push(i+1)
+                    if (!searchResult.includes(i+1)) {
+                        searchResult.push(i+1)
+                    }
                 };
             } 
         }
