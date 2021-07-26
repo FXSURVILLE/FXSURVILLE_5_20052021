@@ -324,6 +324,7 @@ function closeTag(elmnt) { //icone en cible
         cross[i].parentNode.remove(cross[i]);
         storeTags();
         rechTags()
+        majDropdown();
       }
     }
 }
