@@ -55,7 +55,7 @@ function initIdResult() {
 };
 
 
-// *****Dropdown*****
+// *****Création des listes des Dropdown*****
 function majDropdown() {
     let recupIngredients=[];
     listAppliance=[];
@@ -255,6 +255,7 @@ function tagCreation(inp, arr) {
         inp.classList.add("up");
         // si liste déja onverte, la ferme
         closeAllLists();
+        this.parentNode.classList.add(this.id);
         // creation de la div pour la liste
         let a = document.createElement("ul");
         a.setAttribute("id", this.id + "-list");
@@ -333,7 +334,6 @@ function closeTag(elmnt) { //icone en cible
 tagCreation(idIngredient, listIngredients);
 tagCreation(idAppareil, listAppliance);
 tagCreation(idUstensiles, listUstensils);
-
 
 // recupération des tags
 function storeTags() {
