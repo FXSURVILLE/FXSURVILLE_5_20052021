@@ -1,7 +1,8 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
 }
 
 body {
@@ -15,13 +16,14 @@ figure {
 
 * {
   text-decoration: none;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #000000;
 }
 
 .recherche__texte {
   font-size: 18px;
 }
+
 .recherche .fa-search {
   font-size: 32px;
 }
@@ -31,10 +33,12 @@ figure {
   font-size: 14px;
   font-weight: 700;
 }
+
 .filtres__select .selected .fa-times-circle {
   color: #ffffff;
   font-size: 20px;
 }
+
 .filtres .choix {
   font-size: 18px;
   font-weight: 700;
@@ -43,16 +47,20 @@ figure {
 .recette .titre {
   font-size: 18px;
 }
+
 .recette .duree {
   font-size: 18px;
   font-weight: 700;
 }
+
 .recette .duree .fa-clock {
   font-size: 20px;
 }
+
 .recette .ingredients {
   font-size: 12px;
 }
+
 .recette .description {
   font-size: 12px;
 }
@@ -63,14 +71,28 @@ figure {
 }
 
 .accueil {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
+
 .accueil__logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   height: auto;
   width: 50%;
   margin: 20px 0px 10px 0px;
@@ -81,16 +103,25 @@ footer {
   padding-top: 20px;
   padding-bottom: 30px;
 }
+
 footer h1 {
   margin-left: 25px;
 }
+
 footer nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-flow: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
 }
+
 footer nav a {
   margin-left: 25px;
 }
+
 footer nav .fas {
   width: 30px;
 }
@@ -98,14 +129,20 @@ footer nav .fas {
 .recherches {
   margin: 0% 4% 0% 4%;
 }
+
 .recherches .recherche {
   margin: 2%;
   width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   background-color: #e7e7e7;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   border-radius: 5px;
 }
+
 .recherches .recherche__texte {
   height: 69px;
   width: 100%;
@@ -114,6 +151,7 @@ footer nav .fas {
   border-radius: 5px;
   padding-left: 10px;
 }
+
 .recherches .recherche .fa-search {
   position: relative;
   top: 18px;
@@ -123,33 +161,59 @@ footer nav .fas {
 .filtres {
   padding-left: 5%;
 }
+
 .filtres__select {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
+
 .filtres__select .selected {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 1%;
   padding-left: 5px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   border-radius: 5px;
 }
+
 .filtres__select .selected .fa-times-circle {
   padding: 5px;
 }
+
 .filtres__choix {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
+
 .filtres__choix .box-choix {
   margin: 1%;
   border-radius: 5px;
+  width: -webkit-min-content;
+  width: -moz-min-content;
   width: min-content;
   position: relative;
 }
+
 .filtres__choix .box-choix .choix {
   margin: 1%;
   height: 69px;
@@ -159,10 +223,17 @@ footer nav .fas {
   border: hidden;
   color: #ffffff;
 }
+
 .filtres .new-choice {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   width: 667px;
 }
 
@@ -195,51 +266,84 @@ footer nav .fas {
 
 #recettes {
   margin: 0% 4% 4% 4%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  justify-content: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
+
 #recettes .bloc-recette {
   height: 364px;
   margin: 2%;
 }
+
 #recettes .bloc-recette .img {
   height: 178px;
   background-color: #c7bebe;
   border-radius: 5px 5px 0px 0px;
 }
+
 #recettes .bloc-recette .recette {
   height: 186px;
   background-color: #e7e7e7;
   border-radius: 0px 0px 5px 5px;
   padding-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
+
 #recettes .bloc-recette .recette .titre {
   width: 55%;
   height: 50px;
   padding: 0% 5% 0% 5%;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
 #recettes .bloc-recette .recette .duree {
   width: 85px;
   height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
 #recettes .bloc-recette .recette .duree .fa-clock {
   margin-right: 5px;
 }
+
 #recettes .bloc-recette .recette .ingredients {
   width: 40%;
   overflow: hidden;
@@ -247,6 +351,7 @@ footer nav .fas {
   height: 65%;
   margin: 0% 5% 0% 5%;
 }
+
 #recettes .bloc-recette .recette .description {
   width: 40%;
   overflow: hidden;
@@ -257,34 +362,25 @@ footer nav .fas {
 
 #ingredient.up + .fas {
   -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
 #appareil.up + .fas {
   -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
 #ustensiles.up + .fas {
   -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
 .fas {
   -webkit-transition: -webkit-transform 500ms;
-  -moz-transition: -moz-transform 500ms;
-  -o-transition: -o-transform 500ms;
-  -ms-transition: -ms-transform 500ms;
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  transition: -webkit-transform 500ms ease-in-out;
   transition: transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
 }
 
 @media all {
@@ -292,25 +388,24 @@ footer nav .fas {
     width: 100%;
   }
 }
+
 @media all and (min-width: 720px) {
   .accueil__logo {
     height: auto;
     width: 30%;
   }
-
   .bloc-recette {
     width: 45%;
   }
 }
+
 @media all and (min-width: 1024px) {
   .accueil__logo {
     height: 100px;
     width: auto;
   }
-
   .bloc-recette {
     width: 29.3%;
   }
 }
-
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=main.css.map */

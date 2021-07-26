@@ -49,7 +49,6 @@
             position:relative;
             .choix {
                 @include filtres;
-                background-color: transparent;
             }
         }
     }
@@ -63,20 +62,18 @@
     top:25px;
     right:20px;
 }
-// .choix-tag {
-//     display: inline-flex;
-//     @include center-item;
-//     padding-right: 20px;
-// }
 
 #ingredient-list , .ingredient {
-    background-color: $color-ingredients;
+    background-color: $color-ingredients;    
+    border-radius: 5px;
 }
 #appareil-list , .appareil {
     background-color: $color-appareil;
+    border-radius: 5px;
 }
 #ustensiles-list , .ustensiles {
     background-color: $color-ustensiles;
+    border-radius: 5px;
 }
 
 .ingredient .choice , .appareil .choice , .ustensiles .choice {
