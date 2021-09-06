@@ -110,7 +110,7 @@ searchBarId.addEventListener("input", function(e) {
                     searchResult.push(e.id)};
                 }
             e.ingredients.forEach(ing=>{
-                if (ing.ingredient.toLowerCase().includes(searchText)) { // recherche dans titre
+                if (ing.ingredient.toLowerCase().includes(searchText)) { // recherche dans ingredients
                     if (!searchResult.includes(e.id)) {
                         searchResult.push(e.id)};
                     }
@@ -132,7 +132,7 @@ function rechTags() {
     ustResult = [];
     for (let i = 0; i < recipes.length; i++) {
         ingTag.map(e=> {
-            if (arrayIngredients[i].includes(ingTag[0])) { // fait premier tag
+            if (arrayIngredients[i].includes(ingTag[0])) { // fait premier tag ingredient
                 if(!ingResult.includes(i+1)) {
                     ingResult.push(i+1);
                 }
@@ -147,7 +147,7 @@ function rechTags() {
             }
         });
         appTag.map(e=> {
-            if (arrayAppliance[i].includes(appTag[0])) { // fait premier tag
+            if (arrayAppliance[i].includes(appTag[0])) { // fait premier tag appareil
                 if(!appResult.includes(i+1)) {
                     appResult.push(i+1);
                 }
@@ -162,7 +162,7 @@ function rechTags() {
             }
         });
         ustTag.map(e=> {
-            if (arrayUstensils[i].includes(ustTag[0])) { // fait premier tag
+            if (arrayUstensils[i].includes(ustTag[0])) { // fait premier tag ustensils
                 if(!ustResult.includes(i+1)) {
                     ustResult.push(i+1);
                 }
@@ -240,8 +240,8 @@ function listOfIngredients(recipeIngredients) {
 function tagCreation(inp, arr) {
     // listener de la recherche
     inp.addEventListener("input", function(e) {
-        console.log(listIngredients);
-        console.log(arr);
+        // console.log(listIngredients);
+        // console.log(arr);
         if (inp==idIngredient) {
             arr=listIngredients;
         } else if (inp==idAppareil) {
@@ -304,6 +304,7 @@ function tagCreation(inp, arr) {
     //ferme la liste quand on clic ailleurs
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
+        // vider les input
         idIngredient.value = "";
         idAppareil.value = "";
         idUstensiles.value = "";
