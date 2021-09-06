@@ -253,6 +253,7 @@ function tagCreation(inp, arr) {
         // si liste déja onverte, la ferme
         closeAllLists();
         this.parentNode.classList.add(this.id);
+        this.parentNode.id="box"+this.id;
         // creation de la div pour la liste
         let a = document.createElement("ul");
         a.setAttribute("id", this.id + "-list");
@@ -270,7 +271,7 @@ function tagCreation(inp, arr) {
             //recup classe pour config tag
             let classe = this.id;
             // surbrillance du texte cherché
-            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML = "<strong class='strong'>" + arr[i].substr(0, val.length) + "</strong>";
             b.innerHTML += arr[i].substr(val.length);
             // ajoute type + valeur
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";

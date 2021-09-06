@@ -197,6 +197,10 @@ footer nav .fas {
   color: white;
 }
 
+.strong {
+  color: white;
+}
+
 #recettes {
   margin: 0% 4% 4% 4%;
   display: flex;
