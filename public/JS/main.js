@@ -1,93 +1,222 @@
 import {recipes} from './recipes.js'; 
-console.table(recipes);
+// console.table(recipes); //tableau de recipes dans console
 
-// recipes.forEach(recipe => console.log(recipe));
-// recipes.forEach(recipe => console.log(recipe.name));
-// recipes.forEach(recipe => console.log(recipe.ingredients));
-// recipes.forEach(recipe => console.log(recipe.description));
-// recipes.forEach(recipe => console.log(recipe.appliance));
-// recipes.forEach(recipe => console.log(recipe.ustensils));
-// console.log(recette);
-
-// Ingredients
-const recupIngredients=[]; // ingrédients de chaque recette'
-recipes.forEach(recipe => recupIngredients.push(recipe.ingredients));
-console.log(recupIngredients);
-let listIngredients=[];
-recupIngredients.flat(1).forEach(ingredients => {
-    if (!listIngredients.includes(ingredients.ingredient)) { // eviter les doublons
-        listIngredients.push(ingredients.ingredient)}
-});
-// liste des ingredients triés
-listIngredients.sort((a,b)=>a.localeCompare(b));
-console.log(listIngredients);
-
-
-// Appliance(appareils)
-let listAppliance=[]; //liste des appliances
-recipes.forEach(recipe => {
-    if (!listAppliance.includes(recipe.appliance)) { // eviter les doublons
-        listAppliance.push(recipe.appliance)}
-});
-// liste des appareils triés
-listAppliance.sort((a,b)=>a.localeCompare(b))
-console.log(listAppliance);
+// *****variables*****
+// getElements du DOM
+const tags = document.getElementsByClassName("selected");
+const cross = document.getElementsByClassName("fa-times-circle");
+const idIngredient = document.getElementById("ingredient");
+const idAppareil = document.getElementById("appareil");
+const idUstensiles = document.getElementById("ustensiles");
+const boxIngredient = document.getElementById("boxIngredient");
+const boxAppareil = document.getElementById("boxAppareil");
+const boxUstensiles = document.getElementById("boxUstensiles");
+const searchBarId = document.getElementById("search-text");
+// tableaux de tags actifs
+let ingTag = [];
+let appTag = [];
+let ustTag = [];
+// résultats
+let searchResult = []; // résultat de la recherche
+let ingResult = []; // résultat des tags ingredients
+let appResult = []; // résultat des tags appareils
+let ustResult = []; // résultat des tags ustensils
+// tableau d'indices filtré
+let idResult;
+// listes dropdown
+let listIngredients;
+let listAppliance;
+let listUstensils;
 
 
-// Ustensils
-let arrayUstensils=[];
-recipes.forEach(recipe => arrayUstensils.push(recipe.ustensils));
-console.log(arrayUstensils);
-// liste d'ustensils
-let listUstensils=[];
-arrayUstensils.flat().forEach(ustensil => {
-    if (!listUstensils.includes(ustensil)) { // eviter les doublons
-        listUstensils.push(ustensil)}
-});
-// liste des Ustensils triés
-listUstensils.sort((a,b)=>a.localeCompare(b));
-console.log(listUstensils);
+// *****fonctions à lancer à l'ouverture*****
+fiches();
+initIdResult();
+function initIdResult() {
+    idResult=recipes.map(recipe => recipe.id);
+};
+searchResult=idResult;
 
-//création des fiches recette
-let eachName ='';
-recipes.forEach(recipe => {eachName += `
-<div class="bloc-recette" id="recipe${recipe.id}">
-    <div class="img">
-        <img class="image" src="" alt="" title="">
+
+// *****Création des listes des Dropdown*****
+majDropdown();
+function majDropdown() {
+    let recupIngredients=[];
+    listAppliance=[];
+    let recupUstensils=[];
+    for (let i = 0; i < idResult.length; i++) {
+        let idUsed = idResult[i]-1;
+        recupIngredients.push(recipes[idUsed].ingredients)
+        if (!listAppliance.includes(recipes[idUsed].appliance)) { // eviter les doublons appareils
+            listAppliance.push(recipes[idUsed].appliance)
+        }
+        recupUstensils.push(recipes[idUsed].ustensils)
+    }
+    listIngredients=[];
+    recupIngredients.flat(1).forEach(ingredients => {
+        if (!listIngredients.includes(ingredients.ingredient)) { // eviter les doublons ingrédients
+            listIngredients.push(ingredients.ingredient)}
+    });
+    listUstensils=[];
+    recupUstensils.flat().forEach(ustensil => {
+        if (!listUstensils.includes(ustensil)) { // eviter les doublons ustensiles
+            listUstensils.push(ustensil)}
+    });
+    // listes triés
+    listIngredients.sort((a,b)=>a.localeCompare(b));
+    listAppliance.sort((a,b)=>a.localeCompare(b))
+    listUstensils.sort((a,b)=>a.localeCompare(b));
+}
+
+
+
+// *****tableaux simplifiés pour recherche*****
+// tableau des ingredients
+const arrayIngredients=recipes.map(e=>e.ingredients.map(i=>i.ingredient))
+// tableau des appareils
+const arrayAppliance=recipes.map(e=>e.appliance)
+
+
+// *****Création des fiches recette*****
+function fiches() {
+    let eachName ='';
+    recipes.forEach(recipe => {eachName += `
+    <div class="bloc-recette" id="${recipe.id}" display = "">
+        <div class="img">
+            <img class="image" src="" alt="" title="">
+        </div>
+        <div class="recette">
+            <div class="titre">${recipe.name}</div>
+            <p class="duree"><i class="far fa-clock"></i>${recipe.time} mn</p>
+            <ul class="ingredients">${listOfIngredients(recipe.ingredients)}</ul>
+            <div class="description">${recipe.description}</div>
+        </div>
     </div>
-    <div class="recette">
-        <div class="titre">${recipe.name}</div>
-        <p class="duree"><i class="far fa-clock"></i>${recipe.time} mn</p>
-        <ul class="ingredients">${listOfIngredients(recipe.ingredients)}</ul>
-        <div class="description">${recipe.description}</div>
-    </div>
-</div>
-`
-});
-document.getElementById("recettes").innerHTML=eachName;
+    `
+    });
+    document.getElementById("recettes").innerHTML=eachName;
+}
 
 
-let searchBarId = document.getElementById("search-text");
+// *****Recherches*****
+// zone de recherche
 searchBarId.addEventListener("input", function(e) {
-    let searchRegex = /^\S{3,30}$/; // \S ou [a-zA-Z]+cara spé?
-    let searchText = e.target.value;
+    let searchRegex = /^.{3,}$/g; // \S ou [a-zA-Z]+cara spé?
+    let searchText = e.target.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     if (searchRegex.test(searchText) === true) {
-        console.log("ok");
-        const result = recupIngredients[0].filter(
-            (e) => e.ingredient == searchText       // tri sur grammes
-        );
-        console.log(searchText);
-        console.log(result);
+        searchResult=[];
+        recipes.forEach(e => {
+            if (e.name.toLowerCase().includes(searchText)) { // recherche dans titre
+                searchResult.push(e.id)};
+            if (e.description.toLowerCase().includes(searchText)) { // recherche dans description
+                if (!searchResult.includes(e.id)) {
+                    searchResult.push(e.id)};
+                }
+            e.ingredients.forEach(ing=>{
+                if (ing.ingredient.toLowerCase().includes(searchText)) { // recherche dans ingredients
+                    if (!searchResult.includes(e.id)) {
+                        searchResult.push(e.id)};
+                    }
+            })          
+        });
+        searchFusion()
+        majDropdown();
     } else {
-        console.log("nok");
+        searchResult=[];
+        recipes.map(recipe => searchResult.push(recipe.id));
+        searchFusion();
     }
 });
 
+// recherche par les tags
+function rechTags() {
+    ingResult = [];
+    appResult = [];
+    ustResult = [];
+    for (let i = 0; i < recipes.length; i++) {
+        ingTag.map(e=> {
+            if (arrayIngredients[i].includes(ingTag[0])) { // fait premier tag ingredient
+                if(!ingResult.includes(i+1)) {
+                    ingResult.push(i+1);
+                }
+                for (let j = 1; j < ingTag.length; j++) { // filtre avec tag suivants
+                    if (!arrayIngredients[i].includes(ingTag[j])) {
+                        if(ingResult.includes(i+1)) { // retire les index non validés par
+                            let reduce=ingResult.indexOf(i+1);
+                            ingResult.splice(reduce,1);
+                        }
+                    }
+                }
+            }
+        });
+        appTag.map(e=> {
+            if (arrayAppliance[i].includes(appTag[0])) { // fait premier tag appareil
+                if(!appResult.includes(i+1)) {
+                    appResult.push(i+1);
+                }
+                for (let j = 1; j < appTag.length; j++) { // filtre avec tag suivants
+                    if (!arrayAppliance[i].includes(appTag[j])) {
+                        if(appResult.includes(i+1)) { // retire les index non validés par
+                            let reduce=appResult.indexOf(i+1);
+                            appResult.splice(reduce,1);
+                        }
+                    }
+                }
+            }
+        });
+        ustTag.map(e=> {
+            if (arrayUstensils[i].includes(ustTag[0])) { // fait premier tag ustensils
+                if(!ustResult.includes(i+1)) {
+                    ustResult.push(i+1);
+                }
+                for (let j = 1; j < ustTag.length; j++) { // filtre avec tag suivants
+                    if (!arrayUstensils[i].includes(ustTag[j])) {
+                        if(ustResult.includes(i+1)) { // retire les index non validés par
+                            let reduce=ustResult.indexOf(i+1);
+                            ustResult.splice(reduce,1);
+                        }
+                    }
+                }
+            }
+        });
+    }
+    searchFusion()
+}
 
-// foreach if regex= name let id 
+// fusion des recherches
+function searchFusion() {
+    initIdResult();
+    if (ingTag.length!=0) {   
+        let a=idResult.filter(x => ingResult.includes(x));
+        idResult=a;
+    }
+    if (appTag.length!=0) {   
+        let a=idResult.filter(x => appResult.includes(x));
+        idResult=a;
+    }
+    if (ustTag.length!=0) {   
+        let a=idResult.filter(x => ustResult.includes(x));
+        idResult=a;
+    }
+    if (searchResult.length!=0) {   
+        let a=idResult.filter(x => searchResult.includes(x));
+        idResult=a;
+    }
+    if (searchResult.length==0) {
+        idResult=[];
+    }
+    recipes.forEach(recipe=> {
+        if (idResult.includes(recipe.id)) {
+            document.getElementById(recipe.id).style.display = "";
+        } else {
+            document.getElementById(recipe.id).style.display = "none";
+        };
+    })
+}
 
 
-// Ingrédients d'une recette
+
+// *****Ingrédients d'une recette*****
 function listOfIngredients(recipeIngredients) {
     let ingredientsNeeded = '';
     recipeIngredients.forEach(e => {
@@ -108,110 +237,44 @@ function listOfIngredients(recipeIngredients) {
     return ingredientsNeeded;
 };
 
-// // Nombre de recettes
-// const length = recipes.length
-// console.log(length);
 
-// function liste() {
-// let liste = "";
-// for(var i = 0; i < length; i++){
-//     liste += recipes.ingredients[i].ingredient+"\n";
-//     console.log(liste);
-// }
-// return liste;
-// };
-
-// 0 recherche dans tout
-
-// 1 recherche dans classes des fiches
-
-// 2 recherche dans tableau
-
-
-// recupIngredients.forEach(e => e.forEach(i => console.log("<strong>"+i.ingredient+":</strong>"+i.quantity+i.unit)));
-
-// // //surveille la recherche
-// const rechercheTexte = document.getElementById('recherche__texte');
-// rechercheTexte.addEventListener('input',function recherche(){
-//     if ()
-// });
-
-// function recherche() {}
-
-// const recipesName = recipes.map(recipe => recipe.name); 
-
-// afficher les ingrédients
-// let listeIngredients = ingredients.map(e => ingredients + ": " quantity + unit);
-
-// // filtrer (ingredientsFiltres= tous les éléments du tableau ingrédients moins l'elementdufiltre )
-// let ingredientsFiltres = ingredients.filter(function(ingredient) {
-//     if(ingredient != "elementdufiltre"){
-//         return true; // ou: return ingrédient;
-//     }
-// })
-// = si un seul parametre
-// let ingredientsFiltres = ingredients.filter(function(ingredient) {
-//     if(ingredient != "elementdufiltre"){
-//         return true; // ou: return ingrédient;
-//     }
-// })
-
-
-// class FicheRecetteElement extends HTMLElement {
-//     constructor(){
-//         super();
-//     }
-//     connectedCallback(){
-//         // let name = recipe.name;
-//         // let ingredients = this(recipe.ingredients);
-//         // let description = this(recipe.description);
-//         this.innerHTML = `
-//         <div class="bloc-recette">
-//             <div class="img">
-//                 <img class="image" src="" alt="" title="">
-//             </div>
-//             <div class="recette">
-//                 <div class="titre">zgzegsdsgsdgsd</div>
-//                 <p class="duree"><i class="far fa-clock"></i> 166 min</p>
-//                 <div class="ingredients">dthf</div>
-//                 <div class="description">shdzfgee eeeeeeeeeeeeee qzegagzahe zhqfqzdssss sssssssssss ssssssssssssss ssssssssss ssssssssssss sssssssssssss sssssssss</div>
-//             </div>
-//         </div>
-//         `;
-//     }
-// }
-// window.customElements.define('fiche-recette',FicheRecetteElement);
-
-let idIngredient = document.getElementById("ingredient");
-let idAppareil = document.getElementById("appareil");
-let idUstensiles = document.getElementById("ustensiles");
-
-
-// creation des filtres
-function autocomplete(inp, arr) {
+// *****Tags*****
+// creation de la dropdown
+function tagCreation(inp, arr) {
     // listener de la recherche
     inp.addEventListener("input", function(e) {
-        let a, b, i, val = this.value;
+        // console.log(listIngredients);
+        // console.log(arr);
+        if (inp==idIngredient) {
+            arr=listIngredients;
+        } else if (inp==idAppareil) {
+            arr=listAppliance;
+        } else {
+            arr=listUstensils;
+        }
+        inp.classList.add("up");
         // si liste déja onverte, la ferme
         closeAllLists();
-        // if (!val) { return false;}
+        this.parentNode.classList.add(this.id);
+        this.parentNode.id="box"+this.id;
         // creation de la div pour la liste
-        a = document.createElement("ul");
+        let a = document.createElement("ul");
         a.setAttribute("id", this.id + "-list");
         a.setAttribute("class", "new-choice");
         // ajoute ul
         this.parentNode.appendChild(a);
         // pour chaque item du tableau
-        for (i = 0; i < arr.length; i++) {
+        for (let i = 0; i < arr.length; i++) {
+            let val = this.value;
         //   Controler si le texte commence par la ref
           if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
             // creation div pour chaque ref trouvée
-            b = document.createElement("li");
+            let b = document.createElement("li");
             b.setAttribute("class", this.id + " choice");
             //recup classe pour config tag
             let classe = this.id;
             // surbrillance du texte cherché
-            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML = "<strong class='strong'>" + arr[i].substr(0, val.length) + "</strong>";
             b.innerHTML += arr[i].substr(val.length);
             // ajoute type + valeur
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
@@ -223,8 +286,10 @@ function autocomplete(inp, arr) {
                 let tag = `<li class="${classe} selected">${choice}<i class="far fa-times-circle"></i></li>`
                 // ajout d'un tag
                 document.getElementById("tag").innerHTML+=tag;
+                storeTags();
                 // fermeture de la liste
                 closeAllLists();
+                majDropdown();
             });
             // ajoute les li à ul
             a.appendChild(b);
@@ -243,28 +308,55 @@ function autocomplete(inp, arr) {
     //ferme la liste quand on clic ailleurs
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
+        // vider les input
         idIngredient.value = "";
         idAppareil.value = "";
         idUstensiles.value = "";
+        // retirer rotation des chevrons
+        idIngredient.classList.remove("up");
+        idAppareil.classList.remove("up");
+        idUstensiles.classList.remove("up");
+        // retirer classes des box
+        boxIngredient.classList.remove("ingredient");
+        boxAppareil.classList.remove("appareil");
+        boxUstensiles.classList.remove("ustensiles");
     });
-  }
-
-
-  //close tags
-  function closeTag(elmnt) {
-    var tag = document.getElementsByClassName("fa-times-circle"); //icone en cible
-    for (var i = 0; i < tag.length; i++) {
-      if (elmnt == tag[i]) {
-        tag[i].parentNode.remove(tag[i]);
+};
+// ferme au clic
+document.addEventListener("click", function (e) {
+    closeTag(e.target);
+});
+// close tags
+function closeTag(elmnt) { //icone en cible
+    for (var i = 0; i < cross.length; i++) {
+      if (elmnt == cross[i]) {
+        cross[i].parentNode.remove(cross[i]);
+        storeTags();
+        rechTags()
+        majDropdown();
       }
     }
-  }
-  //ferme au clic
-  document.addEventListener("click", function (e) {
-    closeTag(e.target);
-  });
-  
-//   champs de selection
-  autocomplete(idIngredient, listIngredients);
-  autocomplete(idAppareil, listAppliance);
-  autocomplete(idUstensiles, listUstensils);
+}
+// champs de selection pour dropdown
+tagCreation(idIngredient, listIngredients);
+tagCreation(idAppareil, listAppliance);
+tagCreation(idUstensiles, listUstensils);
+
+// recupération des tags
+function storeTags() {
+    ingTag = [];
+    appTag = [];
+    ustTag = [];
+    for(var i = 0; i < tags.length; i++){
+        if(tags[i].className.includes("ingredient")) {
+            ingTag.push(tags[i].textContent);
+        }
+        if(tags[i].className.includes("appareil")) {
+            appTag.push(tags[i].textContent);
+        }
+        if(tags[i].className.includes("ustensiles")) {
+            ustTag.push(tags[i].textContent);
+        }
+        rechTags();
+    }
+}

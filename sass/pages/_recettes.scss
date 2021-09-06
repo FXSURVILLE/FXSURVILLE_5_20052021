@@ -46,9 +46,9 @@
             margin: 1%;
             border-radius: 5px;
             width: min-content;
+            position:relative;
             .choix {
                 @include filtres;
-                background-color: transparent;
             }
         }
     }
@@ -57,20 +57,34 @@
         width: 667px;
     }
 }
+.fa-chevron-down {
+    position:absolute;
+    top:25px;
+    right:20px;
+}
+
 #ingredient-list , .ingredient {
-    background-color: $color-ingredients;
+    background-color: $color-ingredients;    
+    border-radius: 5px;
 }
 #appareil-list , .appareil {
     background-color: $color-appareil;
+    border-radius: 5px;
 }
 #ustensiles-list , .ustensiles {
     background-color: $color-ustensiles;
+    border-radius: 5px;
 }
 
 .ingredient .choice , .appareil .choice , .ustensiles .choice {
     width: 212px;
     list-style: none;
     padding: 5px 0px 5px 10px;
+    color: white;
+}
+
+.strong {
+    color: white;
 }
 
 #recettes {
@@ -116,4 +130,39 @@
             }
         }
     }
+}
+
+#ingredient {
+    &.up + .fas{
+        -webkit-transform:rotate(180deg); 
+        -moz-transform:rotate(180deg);
+        -o-transform:rotate(180deg); 
+        -ms-transform:rotate(180deg); 
+        transform:rotate(180deg);
+    }
+}
+#appareil {
+    &.up + .fas{
+        -webkit-transform:rotate(180deg); 
+        -moz-transform:rotate(180deg);
+        -o-transform:rotate(180deg); 
+        -ms-transform:rotate(180deg); 
+        transform:rotate(180deg);
+    }
+}
+#ustensiles {
+    &.up + .fas{
+        -webkit-transform:rotate(180deg); 
+        -moz-transform:rotate(180deg);
+        -o-transform:rotate(180deg); 
+        -ms-transform:rotate(180deg); 
+        transform:rotate(180deg);
+    }
+}
+.fas {
+    -webkit-transition:-webkit-transform 500ms; 
+    -moz-transition:-moz-transform 500ms;       
+    -o-transition:-o-transform 500ms;           
+    -ms-transition:-ms-transform 500ms;    
+    transition: transform 500ms ease-in-out;   
 }
