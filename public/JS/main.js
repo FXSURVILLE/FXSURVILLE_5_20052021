@@ -8,6 +8,9 @@ const cross = document.getElementsByClassName("fa-times-circle");
 const idIngredient = document.getElementById("ingredient");
 const idAppareil = document.getElementById("appareil");
 const idUstensiles = document.getElementById("ustensiles");
+const boxIngredient = document.getElementById("boxIngredient");
+const boxAppareil = document.getElementById("boxAppareil");
+const boxUstensiles = document.getElementById("boxUstensiles");
 const searchBarId = document.getElementById("search-text");
 // tableaux de tags actifs
 let ingTag = [];
@@ -313,6 +316,10 @@ function tagCreation(inp, arr) {
         idIngredient.classList.remove("up");
         idAppareil.classList.remove("up");
         idUstensiles.classList.remove("up");
+        // retirer classes des box
+        boxIngredient.classList.remove("ingredient");
+        boxAppareil.classList.remove("appareil");
+        boxUstensiles.classList.remove("ustensiles");
     });
 };
 // ferme au clic
