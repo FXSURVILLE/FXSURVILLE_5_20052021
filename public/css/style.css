@@ -39,6 +39,9 @@ figure {
   font-size: 18px;
   font-weight: 700;
 }
+.filtres ::placeholder {
+  color: white;
+}
 
 .recette .titre {
   font-size: 18px;
@@ -191,6 +194,7 @@ footer nav .fas {
   width: 212px;
   list-style: none;
   padding: 5px 0px 5px 10px;
+  color: white;
 }
 
 #recettes {
